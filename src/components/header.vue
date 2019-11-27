@@ -6,7 +6,7 @@
             </a>
             <div class="logo-holder">
                 <!-- <img class="logo" src="../assets/img/logo.png" alt=""> -->
-                <p>LOGO</p>
+                <p>StudentHack</p>
             </div>
             <div>
                 <menu v-bind:class="{ mobile: isMobile }" class="menu flex">
@@ -30,6 +30,21 @@
 header {
     background: #24292e;
     min-height: 50px;
+}
+.logo-holder {
+    color: #FFF;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    ::after {
+        content: '';
+        display: inline-block;
+        width: 10px; height: 15px;
+        background-color: rgb(3, 224, 114);
+        margin-left: 5px;
+    }
 }
 .menu {
     margin-left: 50px;

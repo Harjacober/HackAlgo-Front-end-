@@ -5,7 +5,7 @@
         <p>We believe<br>The future is<br> Fast and smart.</p>
         <div class="flex nowrap mar-tb-15">
           <router-link to="/home">Login</router-link>
-          <router-link to="/home">Sign Up</router-link>
+          <router-link to="/home" class="su">Sign Up</router-link>
         </div>
       </div>
       <img src="../assets/img/hero.svg" alt="hero image">
@@ -66,6 +66,11 @@
       color: #ffffff;
       border: 1px solid #ffffff;
     }
+    a.su {
+        background: #ffffff;
+        color: #24292e;
+        font-weight: bold;
+      }
   }
   img {
     width: 600px;
