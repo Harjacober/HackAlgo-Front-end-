@@ -24,5 +24,10 @@
             color: #969696;
             padding: 20px;
         }
+        @media only screen and (max-width: 720px) {
+            .closing-quote {
+                width: 100%;
+            }
+        }
     }
 </style>

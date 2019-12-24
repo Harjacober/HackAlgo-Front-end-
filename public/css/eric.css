@@ -300,4 +300,7 @@ b, .strong {
   .gen-pad {
     padding: 5px 15px;
   }
+  .hide-mobile {
+    display: none;
+  }
 }

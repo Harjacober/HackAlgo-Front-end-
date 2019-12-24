@@ -1,16 +1,18 @@
 <template>
-  <component :is="layout">
+  <div id="app">
+    <uiHeader></uiHeader>
     <router-view/>
-  </component>
+    <uiFooter></uiFooter>
+  </div>
 </template>
 <script>
-const defaultLayout = 'defaultLayout';
+import uiHeader from '@/components/header.vue';
+import uiFooter from '@/components/footer.vue';
 
 export default {
-  computed: {
-    layout() {
-      return `${this.$route.meta.layout || defaultLayout}`;
-    },
+  components: {
+    uiHeader,
+    uiFooter,
   },
 };
 </script>

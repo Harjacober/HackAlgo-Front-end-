@@ -8,10 +8,10 @@
           <router-link to="/home" class="su">Sign Up</router-link>
         </div>
       </div>
-      <img src="../assets/img/hero.svg" alt="hero image">
+      <img class="hide-mobile" src="../assets/img/hero.svg" alt="hero image">
     </section>
     <section class="flex col-lg-6 align-items-center gen-pad mar-tb-30">
-      <img class="img-400" src="../assets/img/hero2.svg" alt="hero image">
+      <img class="img-400 hide-mobile" src="../assets/img/hero2.svg" alt="hero image">
       <div class="flex column nowrap pars">
         <p class="text-25"><strong>Build the skills you'll need for the future</strong></p>
         <p class="mar-tb-15">
@@ -55,6 +55,11 @@
 .pars {
   width: 500px;
   margin-left: 100px;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
 }
 .hero {
   background: #24292e;
