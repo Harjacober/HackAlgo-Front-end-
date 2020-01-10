@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import { Login, Register, Reset } from '../views/Auth';
 
 Vue.use(VueRouter);
 
@@ -8,18 +8,29 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import('@/views/Home/Home.vue'),
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import('@/views/About/About.vue'),
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/login.vue'),
+    component: Login,
   },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
+  },
+  {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: Reset,
+  },
+
 ];
 
 const router = new VueRouter({
@@ -27,5 +38,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-
 export default router;
