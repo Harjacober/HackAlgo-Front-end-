@@ -120,7 +120,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../../styles/common.scss";
 
 .app-dialog{
     max-width:300px;

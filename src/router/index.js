@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { Login, Register, Reset } from '../views/Auth';
+import { Login, Register, Reset } from '@/views/Auth';
+import Challenges from '@/views/Challenges/Challenges.vue';
+import Contests from '@/views/Contests/Contests.vue';
+import Dashboard from '@/views/Dashboard/Dashboard.vue';
+import Profile from '@/views/Profile/Profile.vue';
+import Settings from '@/views/Settings/Setting.vue';
 
 Vue.use(VueRouter);
 
@@ -29,6 +34,11 @@ const routes = [
     path: '/reset-password',
     name: 'reset-password',
     component: Reset,
+  },
+  {
+    path: '*',
+    name: 'not-found',
+    component: () => import('@/views/NotFound/NotFound.vue'),
   },
 
 ];

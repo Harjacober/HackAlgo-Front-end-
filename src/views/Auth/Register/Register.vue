@@ -1,6 +1,6 @@
 <template>
     <div class="auth-container">
-       
+       REGISTER
     </div>
 </template>
 

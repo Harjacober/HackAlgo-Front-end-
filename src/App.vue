@@ -36,7 +36,6 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700,600,500,400,300,100|Roboto:600,500,400,300,100&display=swap');
-@import "./styles/common.scss";
 
 *{
   margin:0;
