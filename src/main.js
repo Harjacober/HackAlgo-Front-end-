@@ -5,6 +5,8 @@ import Toaster from './components/Toaster';
 import Dialog from './components/Dialogs/Dialog';
 import ProgressBar from './components/Progress';
 import store from './store';
+import './assets/css/tailwind.css';
+
 
 // use it
 Vue.use(Dialog);
