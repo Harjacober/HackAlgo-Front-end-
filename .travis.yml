@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - node_modules
+jobs:
+  include:
+  - name: Unit Tests
+    stage: Testing/Static Analysis
+    script: 
+      - npm run test:unit -- --forceExit --silent --testTimeout=10000 --maxWorkers=4
+    after_script:
+      - cat ./coverage/lcov.info | coveralls
+  - name: Linting
+    stage: Testing/Static Analysis
+    script: npm run lint
+  - name: Deploy to staging
+    if: branch = master
+    stage: Deployment
+    script: npm run build
+    deploy:
+      on: master
+      provider: heroku
+      skip_cleanup: true
+      api_key:
+        secure: gDDXG9Cn7X+CrAJIOaVIilS1FnhTWABhstl/okcrX6/MI0IgMT2MGUF4syvCw9DlxbEeH6cNw746AOzOn5OeTO9KL9oMvG+juS1SSVqt7LYk+qZRstnzTJAyKKWGJKPhQshDxIK/lPvBQ8VN1UfG0bjBKHVNIURxMev3QFaPy6vueccgEabCbhalf+fWdSo/E8K4JMrqEG34lHXFNi/ZZI/v3aPhYhEy9iobc4AfT1Nqo5LkSZcTxX1igcM2vbqXAHfy5zANYcXut507r3JL1CwOoXvApW5FtNj1ZNfKs7MTQCoF4I1ZUWZ7kzsk2teUck1s/PvzatW/n1OppXBl+XuT7V6MviXhamg7lTJFR6qRw1qMMTqpv8a1QPFDJTLwmpHICpCv+FprgxpDuZ8AQrRiNcoPpXwkPlzB51LLMOy3tZLYJpvc7/XhFpjdIrR48DiAOedPI05/vPrvCfRvSTcAyIt5oBECmce30EhG+fpatHI6oO08xnRKsVMerQM5mv24Re4cBNhF4g6DdZu81Pu+i/zdrMNvsVM/QCKc0ZidVFZbvt2IlTVI426sulIzWrIZC20qN6YFIqUD6jbgz9nrALWE+n1MlK5sI1LZdvnujLVNUfcfRgAw/df+PoWFSQE4MHR4J80PgUssFRL7rXJlHrQDs5UevD8gdAD65n8=
+      app: hackalgo
+stages:
+- Testing/Static Analysis
+- Deployment
