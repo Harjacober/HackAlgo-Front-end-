@@ -44,37 +44,37 @@
 </template>
 
 <script>
-import dropdown from "../Dropdown/Dropdown.vue";
+import dropdown from '../Dropdown/Dropdown.vue';
 
 export default {
-    name:"card",
+    name: 'card',
     components: {
-        dropdown
+        dropdown,
     },
-    data(){
+    data() {
         return {
-            triggerNode: "",
-            isDropdownOpen: false
-        }
+            triggerNode: '',
+            isDropdownOpen: false,
+        };
     },
     mounted() {
         this.triggerNode = this.$refs.triggerNode;
     },
-    props:{
-        item:{
+    props: {
+        item: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
-    methods:{
-        toggleDropdown(){
+    methods: {
+        toggleDropdown() {
             this.isDropdownOpen = !this.isDropdownOpen;
         },
-        hideDropdown(){
+        hideDropdown() {
             this.isDropdownOpen = false;
-        }
-    }
-}
+        },
+    },
+};
 </script>
 <style lang="scss">
 @import "../../styles/common.scss";

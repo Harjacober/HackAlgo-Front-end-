@@ -3,16 +3,16 @@
 </template>
 <script>
 export default {
-    name: "compose-button",
+    name: 'compose-button',
     props: {
         method: { type: Function },
     },
     methods: {
         openDialog() {
-            this.$emit("open")
-        }
-    }
-}
+            this.$emit('open');
+        },
+    },
+};
 </script>
 <style lang="scss" scoped>
 @import "../../styles/common.scss";

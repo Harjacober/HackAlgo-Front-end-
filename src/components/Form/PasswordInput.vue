@@ -17,8 +17,8 @@
 
 
 <script>
-export default{
-    name: "TextInput",
+export default {
+    name: 'TextInput',
     inheritAttrs: false,
     $_veeValidate: {
         // value getter
@@ -28,26 +28,25 @@ export default{
         // // name getter
         name() {
             return this.name;
-        }
+        },
     },
     props: {
         label: {
             type: String,
             required: true,
-            default: 'label'
+            default: 'label',
         },
         error: {
             type: String,
-            default: null
-        }
+            default: null,
+        },
     },
     mounted() {
 
-    }
-}
+    },
+};
 
 </script>
 <style lang="scss">
 
 </style>
-

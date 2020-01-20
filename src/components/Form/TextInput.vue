@@ -16,27 +16,26 @@
 </template>
 
 <script>
-export default{
-    name: "TextInput",
+export default {
+    name: 'TextInput',
     inheritAttrs: false,
     props: {
         label: {
             type: String,
             required: true,
-            default: 'label'
+            default: 'label',
         },
         error: {
             type: String,
-            default: null
-        }
+            default: null,
+        },
     },
     mounted() {
 
-    }
-}
+    },
+};
 
 </script>
 <style lang="scss">
 
 </style>
-

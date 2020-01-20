@@ -16,48 +16,50 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mixin as clickaway } from 'vue-clickaway';
+
 export default {
-  name: "dropdown",
+  name: 'dropdown',
   props: {
        classNames: {
-          type:String,
-          default: ""
+          type: String,
+          default: '',
        },
         isDropdownOpen: {
-            type:Boolean,
-            default: false
+            type: Boolean,
+            default: false,
         },
-        styles:{
-            type:Object,
-            default: ()=> {}
+        styles: {
+            type: Object,
+            default: () => {},
         },
-        refNode:{}
+        refNode: {},
   },
-  mixins: [ clickaway ],
-    computed:{
-        dropdownStyle(){
+  mixins: [clickaway],
+    computed: {
+        dropdownStyle() {
             const dropdownStyle = {
-                ...this.styles
+                ...this.styles,
             };
 
             if (this.isDropdownOpen) {
                 // translate open dropdown
-                dropdownStyle.transform = `translateY(0px)`;
-                dropdownStyle.opacity = "1";
-                dropdownStyle.visibility = "visible";
-                dropdownStyle.WebkitTransform = `translateY(0px)`;
+                dropdownStyle.transform = 'translateY(0px)';
+                dropdownStyle.opacity = '1';
+                dropdownStyle.visibility = 'visible';
+                dropdownStyle.WebkitTransform = 'translateY(0px)';
             }
 
             return dropdownStyle;
-        }
+        },
     },
   methods: {
     away(ev) {
-       if(this.refNode.contains( ev.target )) return;
-        this.$emit("away");
-    }
-  }
+       if (this.refNode.contains(ev.target)) return;
+        this.$emit('away');
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -12,18 +12,19 @@
 </template>
 
 <script>
-import Header from "../Header/Header.vue";
-import Footer from "../Footer/Footer.vue";
-export default {
-  name: "layout",
-  components:{
-    Header, Footer
-  },
-  data (){},
-  props:{},
-  methods:{}
+import Header from '../Header/Header.vue';
+import Footer from '../Footer/Footer.vue';
 
-}
+export default {
+  name: 'layout',
+  components: {
+    Header, Footer,
+  },
+  data() {},
+  props: {},
+  methods: {},
+
+};
 </script>
 
 <style lang="scss">
@@ -49,5 +50,3 @@ export default {
   margin:20px 0;
 }
 </style>
-
-

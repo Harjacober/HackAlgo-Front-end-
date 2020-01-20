@@ -7,7 +7,7 @@
          </p>
       </div>
       <div>
-          <p>Copyright &copy; 2020 StudentHack. | Priacy Policy</p>
+          <p>Copyright &copy; 2020 {{name}}. | Priacy Policy</p>
       </div>
   </footer>
 </template>
@@ -31,3 +31,8 @@
         }
     }
 </style>
+<script>
+export default {
+    props: ['name'],
+};
+</script>

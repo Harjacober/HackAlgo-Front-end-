@@ -1,18 +1,18 @@
 <template>
     <header class="header">
-       
+
     </header>
 </template>
 <script>
 
 export default {
-    name:"app-header",
+    name: 'app-header',
     components: {},
-    data(){},
-    props:{},
+    data() {},
+    props: {},
     mounted() {},
-    methods:{}
-}
+    methods: {},
+};
 </script>
 <style lang="scss">
 </style>

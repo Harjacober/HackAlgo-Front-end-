@@ -49,54 +49,55 @@
 </template>
 
 <script>
-import { TextArea } from "../Form";
+/* eslint-disable */
+import { TextArea } from '../Form';
 
 export default {
-    name:"compose-dialog",
-    components:{
-        TextArea
+    name: 'compose-dialog',
+    components: {
+        TextArea,
     },
-    props:{
-        isVisible:{
+    props: {
+        isVisible: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
-    methods:{
-        handleSubmit(){
-            this.$toaster.success("Successfully saved.. ");
+    methods: {
+        handleSubmit() {
+            this.$toaster.success('Successfully saved.. ');
         },
         close() {
-            this.$emit("close");
-        }
+            this.$emit('close');
+        },
     },
     computed: {
-        dialogContainerPanelStyle(){
-            if(this.isVisible){
+        dialogContainerPanelStyle() {
+            if (this.isVisible) {
                 return {
-                   visibility:"visible"
-                }
+                   visibility: 'visible',
+                };
             }
         },
-        dialogStyle(){
-            if(this.isVisible){
+        dialogStyle() {
+            if (this.isVisible) {
                 return {
-                    transform:`scale(1)`,
+                    transform: 'scale(1)',
                     opacity: 1,
-                    WebkitTransform:`scale(1)`
-                }
+                    WebkitTransform: 'scale(1)',
+                };
             }
         },
-        dialogBackdropStyle(){
-            if(this.isVisible){
+        dialogBackdropStyle() {
+            if (this.isVisible) {
                 return {
                     opacity: 0.7,
-                    visibility:"visible"
-                }
+                    visibility: 'visible',
+                };
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 <style lang="scss">
 .compose-dialog{

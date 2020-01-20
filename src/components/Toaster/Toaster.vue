@@ -14,54 +14,54 @@
     </div>
 </template>
 <script>
-import shortId from "shortid";
+import shortId from 'shortid';
 
 export default {
   props: {
     timeout: {
       type: Number,
-      default: 5000
-    }
+      default: 5000,
+    },
   },
   methods: {
-    success (message, option = {}) {
-        this.add(message, {theme: 'success', timeout: option.timeout})
+    success(message, option = {}) {
+        this.add(message, { theme: 'success', timeout: option.timeout });
     },
-    info (message, option = {}) {
-        this.add(message, {theme: 'info',    timeout: option.timeout})
+    info(message, option = {}) {
+        this.add(message, { theme: 'info', timeout: option.timeout });
     },
-    warning (message, option = {}) {
-        this.add(message, {theme: 'warning', timeout: option.timeout})
+    warning(message, option = {}) {
+        this.add(message, { theme: 'warning', timeout: option.timeout });
     },
-    error (message, option = {}) {
-        this.add(message, {theme: 'error',   timeout: option.timeout})
+    error(message, option = {}) {
+        this.add(message, { theme: 'error', timeout: option.timeout });
     },
-    setIcon( theme ){
-        return  "uil uil-bell";
+    setIcon(theme) {
+        return 'uil uil-bell';
     },
-    add (message, {theme, timeout}) {
+    add(message, { theme, timeout }) {
       if (!this.$parent) {
-        this.$mount()
-        document.body.appendChild(this.$el)
+        this.$mount();
+        document.body.appendChild(this.$el);
       }
-      let icon = this.setIcon( theme );
-      let toast = {message, theme, icon,  key: shortId.generate()}
-      this.toasters.push(toast)
-      setTimeout( () => this.remove(toast), timeout || this.timeout)
+      const icon = this.setIcon(theme);
+      const toast = { message, theme, icon, key: shortId.generate() };
+      this.toasters.push(toast);
+      setTimeout(() => this.remove(toast), timeout || this.timeout);
     },
-    remove (toast) {
-      let i = this.toasters.indexOf(toast)
+    remove(toast) {
+      const i = this.toasters.indexOf(toast);
       if (i >= 0) {
-        this.toasters.splice(i, 1)
+        this.toasters.splice(i, 1);
       }
-    }
+    },
   },
-  data () {
+  data() {
     return {
-      toasters: []
-    }
-  }
-}
+      toasters: [],
+    };
+  },
+};
 </script>
 
 <style lang="scss">
