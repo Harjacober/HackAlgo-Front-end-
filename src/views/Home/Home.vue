@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col flex-no-wrap w-full home">
+    <algoHeader/>
     <section class="flex w-full column justify-center h-screen bg-gray-400
       p-5 lg:p-20">
       <h1 class="text-3xl lg:w-2/12">The Collaboration Platform for API Development</h1>
@@ -46,11 +47,13 @@
 
 <script>
 import algoFooter from '../../components/footer.vue';
+import algoHeader from '../../components/header.vue';
 
 export default {
   name: 'home',
   components: {
     algoFooter,
+    algoHeader,
   },
 };
 </script>

@@ -1,17 +1,16 @@
 <template>
-    <header class="flex nowrap gen-pad col-lg-6 justify-content-space-between">
-        <div class="flex align-items-center nowrap">
-            <a @click.prevent="toggleMenu" class="mobile-menu">
-                <i class="material-icons">menu</i>
-            </a>
-            <div class="logo-holder">
-                <!-- <img class="logo" src="../assets/img/logo.png" alt=""> -->
-                <p>StudentHack</p>
+    <header class="flex flex-no-wrap w-full overflow-x-hidden justify-between px-5 lg:px-20">
+        <div class="flex flex-col items-center w-full overflow-hidden flex-no-wrap
+            lg:flex-row">
+            <div class="logo-holder p-3">
+                <p class="text-sm">HACK-ALGO</p>
             </div>
-            <div>
-                <menu v-bind:class="{ mobile: isMobile }" class="menu flex">
-                    <router-link to="/home">Home</router-link>
-                    <router-link to="/home">Top</router-link>
+            <div class=" flex w-full overflow-x-hidden">
+                <menu class="menu w-12/12 flex
+                    overflow-x-scroll
+                    lg:overflow-x-hidden lg:ml-20">
+                    <router-link to="/">Home</router-link>
+                    <router-link to="/about">About</router-link>
                     <router-link to="/home">Problemset</router-link>
                     <router-link to="/home">GYM</router-link>
                     <router-link to="/home">Rating</router-link>
@@ -21,7 +20,7 @@
         </div>
         <div>
             <a class="profile-menu">
-                <img src="../assets/img/user-circle-solid.svg" alt="">
+                <!-- <img src="../assets/img/user-circle-solid.svg" alt=""> -->
             </a>
         </div>
     </header>
@@ -37,37 +36,23 @@ header {
     flex-flow: row nowrap;
     align-items: center;
     text-transform: uppercase;
-    font-weight: bold;
     ::after {
         content: '';
         display: inline-block;
-        width: 10px; height: 15px;
+        width: 3px; height: 15px;
         background-color: rgb(3, 224, 114);
         margin-left: 5px;
     }
 }
 .menu {
-    margin-left: 50px;
     a {
         padding: 5px 15px;
         color: #e1eaff;
-        font-size: 14px;
+        font-size: 15px;
         text-transform: capitalize;
     }
     a:hover {
         color: #FFF;
-    }
-}
-a.profile-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    color: #fff;
-    position: relative;
-    img{
-        width: 30px; height: 30px;
     }
 }
 a.mobile-menu {
@@ -76,21 +61,6 @@ a.mobile-menu {
     @media only screen and (max-width: 720px) {
         display: flex;
     }
-}
-@media only screen and (max-width: 720px) {
-  .menu {
-      display: none;
-      position: absolute;
-      top: 55px; left: 0;
-      padding: 20px;
-      margin: 0;
-      background: #20242d;
-      flex-flow: column nowrap;
-      width: 100%;
-  }
-  .menu.mobile {
-      display: flex;
-  }
 }
 </style>
 <script>
@@ -101,13 +71,6 @@ export default {
     };
   },
   methods: {
-    toggleMenu() {
-      if (this.isMobile) {
-        this.isMobile = false;
-      } else {
-        this.isMobile = true;
-      }
-    },
   },
 };
 </script>
