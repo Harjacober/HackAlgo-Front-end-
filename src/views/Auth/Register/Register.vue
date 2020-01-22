@@ -2,9 +2,10 @@
     <div class="auth-container">
       <!-- <h1 class="logo color-white  text-center"> HackAlgo </h1> -->
         <div class="auth-content">
+            <div class="auth-content__panel">
             <div class="auth-content__top text-center">
-                <h4 class="heading color-white">Register</h4>
-                <p class="text color-white"> <i class='uil uil-padlock'></i> Create a free account</p>
+                <h4 class="heading ">Register</h4>
+                <p class="text "> <i class='uil uil-padlock'></i> Create a free account</p>
             </div>
             <form v-on:submit.prevent="handleSubmit">
                 <TextInput
@@ -13,6 +14,7 @@
                     v-model="formControls.username.value"
                     required
                     autocomplete="off"
+                    interfaceClass="black"
                     :placeholder="formControls.username.placeholder"
                 >
                 </TextInput>
@@ -22,6 +24,7 @@
                     v-model="formControls.email.value"
                     required
                     autocomplete="off"
+                    interfaceClass="black"
                     :placeholder="formControls.email.placeholder"
                 >
                 </TextInput>
@@ -30,6 +33,7 @@
                    :label="formControls.password.label"
                     name="password"
                     v-model="formControls.password.value"
+                    interfaceClass="black"
                     required
                     :placeholder="formControls.password.placeholder"
                 >
@@ -41,7 +45,8 @@
                 </Button>
             </form>
              <div class="auth-content__bottom text-center">
-                <p class="text color-white">Already have an account? <router-link to="/login">Login</router-link></p>
+                <p class="text ">Already have an account? <router-link to="/login">Login</router-link></p>
+            </div>
             </div>
         </div>
     </div>
@@ -63,7 +68,7 @@ export default {
                     value: '',
                     label: 'Username',
                     touched: false,
-                    placeholder: '',
+                    placeholder: 'E.g coderarc',
                     validationRules: {
                         required: true,
                     },

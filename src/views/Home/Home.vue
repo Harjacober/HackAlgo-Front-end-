@@ -12,7 +12,7 @@
     </section>
     <section class="flex flex-col lg:flex-row content-center justify-center w-full h-auto
       p-5 lg:p-20">
-      <img class="flex object-contain lg:w-5/12" src="../../assets/img/git.svg" alt="">
+      <img class="flex object-contain lg:w-5/12" src="../../assets/svg/git.svg" alt="">
       <div class="flex flex-col justify-center content-center lg:w-5/12 lg:p-10 flex-no-wrap">
         <p class="text-xl py-3 text-center">Sharpen your skill</p>
         <p class="lg:w-12/12 text-center">

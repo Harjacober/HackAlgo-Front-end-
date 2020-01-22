@@ -29,6 +29,10 @@ npm run lint
 ```
 npm run test:unit
 ```
+### ICONS
+checkout iconscout for appropriate icons.
+
+https://iconscout.com/unicons
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

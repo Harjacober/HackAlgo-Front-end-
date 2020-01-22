@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { Login, Register, Reset, ChangePassword } from '@/views/Auth';
-import Challenges from '@/views/Challenges/Challenges.vue';
+import { Login, Register, Recover, ChangePassword } from '@/views/Auth';
 import Contests from '@/views/Contests/Contests.vue';
 import Dashboard from '@/views/Dashboard/Dashboard.vue';
 import Profile from '@/views/Profile/Profile.vue';
-import Settings from '@/views/Settings/Setting.vue';
+import { BasicInformation, ChangePassword as ChangeSettingsPassword } from '@/views/Settings';
 
 Vue.use(VueRouter);
 
@@ -31,14 +30,44 @@ const routes = [
     component: Register,
   },
   {
-    path: '/reset-password',
-    name: 'reset-password',
-    component: Reset,
+    path: '/recover-password',
+    name: 'recover-password',
+    component: Recover,
   },
   {
     path: '/change-password',
     name: 'change-password',
     component: ChangePassword,
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+  },
+  {
+    path: '/settings/basic-information',
+    name: 'basic-information',
+    component: BasicInformation,
+  },
+  {
+    path: '/settings/change-password',
+    name: 'change-settings-password',
+    component: ChangeSettingsPassword,
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    redirect: '/settings/basic-information',
+  },
+  {
+    path: '/Profile',
+    name: 'profile',
+    component: Profile,
+  },
+  {
+    path: '/contests',
+    name: 'contests',
+    component: Contests,
   },
   {
     path: '*',
@@ -51,6 +80,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkExactActiveClass: 'active',
   routes,
 });
 export default router;

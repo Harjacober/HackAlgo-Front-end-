@@ -1,7 +1,7 @@
 <template>
-  <div class="">
-    CONTESTS
-  </div>
+  <Layout pageName="Contests">
+    <div class="contests"></div>
+  </Layout>
 </template>
 
 <style lang="scss" scoped>
@@ -9,7 +9,13 @@
 </style>
 
 <script>
+import Layout from '@/components/Layout/Layout.vue';
+
 export default {
-  name: 'contest',
+  name: 'contests',
+  components: {
+    Layout,
+  },
 };
+
 </script>

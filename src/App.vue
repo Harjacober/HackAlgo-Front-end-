@@ -44,7 +44,6 @@ export default {
 }
 
 body {
-    font-family:$font-family-roboto;
     font-family:$font-family-monserrat;
     overflow-x:hidden;
     #nprogress .bar {
@@ -58,7 +57,7 @@ body {
 }
 
 h1, h2, h3, h4, h5,h6{
-  font-family:$font-family-monserrat;
+  font-family:$font-family-segoe;
 }
 
 html, body, div, span, iframe,
