@@ -1,9 +1,10 @@
 <template>
     <div class="auth-container">
         <div class="auth-content">
+            <div class="auth-content__panel">
             <div class="auth-content__top text-center">
-                <h4 class="heading color-white">Reset</h4>
-                <p class="text color-white"> <i class='uil uil-fast-mail'></i> Enter your email</p>
+                <h4 class="heading ">Password Recovery</h4>
+                <p class="text "> <i class='uil uil-padlock'></i> recover your password securely</p>
             </div>
             <form v-on:submit.prevent="handleSubmit">
                 <TextInput
@@ -22,6 +23,7 @@
             </form>
             <div class="auth-content__bottom text-center">
                 <p class="text"><router-link to="/login">Login Here</router-link></p>
+            </div>
             </div>
         </div>
     </div>

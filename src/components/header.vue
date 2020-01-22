@@ -27,7 +27,7 @@
 </template>
 <style lang="scss" scoped>
 header {
-    background: #24292e;
+    background: $primary-color;
     min-height: 50px;
 }
 .logo-holder {

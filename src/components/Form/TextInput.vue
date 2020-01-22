@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="form-group" v-bind:class="[interfaceClass]">
         <label class="form-label">{{ label  }}</label>
         <input
             type="text"
@@ -29,9 +29,12 @@ export default {
             type: String,
             default: null,
         },
+        interfaceClass: {
+            type: String,
+            default: 'white',
+        },
     },
     mounted() {
-
     },
 };
 
