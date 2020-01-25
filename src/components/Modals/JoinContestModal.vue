@@ -1,14 +1,14 @@
 <template>
-  <div class="dialog-container">
-      <div class="dialog-backdrop" v-bind:style="dialogBackdropStyle" ></div>
-      <div class="dialog-container__panel" v-bind:style="dialogContainerPanelStyle" @click="close">
+  <div class="modal-container">
+      <div class="modal-backdrop" v-bind:style="modalBackdropStyle" ></div>
+      <div class="modal-container__panel" v-bind:style="modalContainerPanelStyle" @click="close">
         <div
-            class="dialog compose-dialog"
-            role="dialog"
-            v-bind:style="dialogStyle"
+            class="modal compose-modal"
+            role="modal"
+            v-bind:style="modalStyle"
             v-on:click.stop
         >
-        <header class="dialog-header">
+        <header class="modal-header">
             <button
                 type="button"
                 class="back-btn to-left btn reset-btn"
@@ -16,22 +16,22 @@
             >
                 <i class="uil uil-arrow-left"></i>
             </button>
-            <h5 class="text-center">Compose a new content</h5>
+            <h5 class="text-center">Join Contest</h5>
         </header>
         <form v-on:submit.prevent="handleSubmit" class="form">
-            <section class="dialog-body">
+            <section class="modal-body">
                 <text-area
                     placeholder="New content...."
                     required="required"
                     name="content"
                 ></text-area>
             </section>
-            <footer class="dialog-footer">
+            <footer class="modal-footer">
                 <button
                     type="submit"
                     class="btn btn-ok"
                 >
-                    Save
+                    Join
                 </button>
 
                 <span
@@ -53,7 +53,7 @@
 import { TextArea } from '../Form';
 
 export default {
-    name: 'compose-dialog',
+    name: 'join-contest-modal',
     components: {
         TextArea,
     },
@@ -72,14 +72,14 @@ export default {
         },
     },
     computed: {
-        dialogContainerPanelStyle() {
+        modalContainerPanelStyle() {
             if (this.isVisible) {
                 return {
                    visibility: 'visible',
                 };
             }
         },
-        dialogStyle() {
+        modalStyle() {
             if (this.isVisible) {
                 return {
                     transform: 'scale(1)',
@@ -88,7 +88,7 @@ export default {
                 };
             }
         },
-        dialogBackdropStyle() {
+        modalBackdropStyle() {
             if (this.isVisible) {
                 return {
                     opacity: 0.7,
@@ -100,7 +100,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.compose-dialog{
+.compose-modal{
     max-width:450px;
     .form{
         .form-control{

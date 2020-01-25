@@ -6,9 +6,13 @@
                     <button class="harmburger-btn btn reset-btn">
                         <i class='uil uil-bars'></i>
                     </button>
+                    <h3 class='title' v-if='headerTitle'> {{ headerTitle }}</h3>
                 </div>
                 <nav class="app-header__nav to-right">
                     <ul >
+                            <li class='timer list' v-if='headerTimer'>
+                              <i class='uil uil-clock-three'></i>{{ headerTimer }}
+                            </li>
                             <li class="profile list">
                                 <div class="flex"   @click="toggleDropdown" ref="profileToggleNode">
                                     <img src="/assets/myAvatar.png" class="profile-image" alt="profile image"/>
@@ -74,9 +78,13 @@ export default {
         };
     },
     props: {
-        viewContent: {
-            type: Boolean,
-            default: false,
+        headerTitle: {
+            type: String,
+            default: null,
+        },
+         headerTimer: {
+            type: String,
+            default: null,
         },
     },
     mounted() {
@@ -144,6 +152,11 @@ export default {
         outline:none;
         transition:0.233s cubic-bezier(0.215, 0.610, 0.355, 1);
       }
+      .title{
+        padding:15px;
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
       .search-form{
         padding:5px;
         position:relative;
@@ -176,6 +189,22 @@ export default {
       padding:10px;
       li.list{
         display:inline-block;
+        &.timer{
+          letter-spacing: 0.05rem;
+          font-weight:600;
+          position: relative;
+          top:-10px;
+          box-shadow: 0 5px 20px 0 rgba(0,0,0,0.2);
+          border-radius:5px;
+          padding:7px 20px;
+          border:1px solid $primary-color;
+          background:$primary-color;
+          color:#3fe065;
+          .uil{
+            font-size:1.1rem;
+            margin-right:3px;
+          }
+        }
         a.link{
           display:block;
           padding:6px;

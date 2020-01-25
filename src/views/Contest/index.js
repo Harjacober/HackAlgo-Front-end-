@@ -1,11 +1,15 @@
-import Contest from './Contest.vue';
 import Contests from './Contests.vue';
-import ScoreBoard from './ScoreBoard.vue';
 import ContestInformation from './ContestInformation.vue';
+import ScoreBoard from './views/ScoreBoard.vue';
+import ContestDashboard from './views/Dashboard.vue';
+import Submission from './views/Submission.vue';
+import ContestProblem from './views/Problem.vue';
 
 export {
-    Contest,
     Contests,
     ContestInformation,
     ScoreBoard,
+    ContestDashboard,
+    Submission,
+    ContestProblem,
 };

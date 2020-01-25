@@ -32,20 +32,26 @@
           <PrimaryCard classNames='dasboard-card'>
             <h3 class="heading"> Explore </h3>
             <ul class='list'>
-              <li >
-                <a href='#'>
-                  <span>#</span> Array & Data Struture
-                </a>
-              </li>
-              <li >
-                <a href='#'> <span>#</span>  Trees </a>
-              </li>
-              <li >
-                <a href='#'> <span>#</span> Mathematical Modeling</a>
-              </li>
-              <li >
-                <a href='#'><span> #</span> Heaps & Hashmaps</a>
-              </li>
+              <List :item='{
+                  tag: true,
+                  text: "Data Struture",
+                  url: "#"
+              }'/>
+              <List :item='{
+                  tag: true,
+                  text: "Tress",
+                  url: "#"
+              }'/>
+              <List :item='{
+                  tag: true,
+                  text: "Mathematical Modeling",
+                  url: "#"
+              }'/>
+              <List :item='{
+                  tag: true,
+                  text: "Heaps & Hashmaps",
+                  url: "#"
+              }'/>
             </ul>
           </PrimaryCard>
         </div>
@@ -53,30 +59,30 @@
           <PrimaryCard classNames='dasboard-card'>
              <h3 class="heading"> Upcoming Contests </h3>
               <ul class='list'>
-                <li >
-                  <a href='#' >
-                    <span>(*)</span> Google uplabs challenge
-                    <p class='time'>January , 15th, 2020 - 4hrs</p>
-                  </a>
-                </li>
-                <li >
-                  <a href='#'>
-                    <span>(*)</span> Aganifa challenge
-                    <p class='time'>January , 15th, 2020 - 4hrs</p>
-                  </a>
-                </li>
-                <li >
-                  <a href='#'>
-                    <span>(*)</span> hashmap 2020
-                    <p class='time'>January , 15th, 2020 - 4hrs</p>
-                  </a>
-                </li>
-                <li >
-                  <a href='#'>
-                    <span>(*)</span> Futa Supercoder club
-                    <p class='time'>January , 15th, 2020 - 4hrs</p>
-                  </a>
-                </li>
+                <List :item='{
+                  contest: true,
+                  text: "Google uplabs challenge",
+                  date: "January , 15th, 2020 - 4hrs",
+                  url: "#"
+                }'/>
+                <List :item='{
+                  contest: true,
+                  text: "Futa codemental club 2020",
+                  date: "January , 15th, 2020 - 4hrs",
+                  url: "#"
+                }'/>
+                <List :item='{
+                  contest: true,
+                  text: "Aganifa challenge",
+                  date: "January , 15th, 2020 - 4hrs",
+                  url: "#"
+                }'/>
+                <List :item='{
+                  contest: true,
+                  text: "hashmap 2020",
+                  date: "January , 15th, 2020 - 4hrs",
+                  url: "#"
+                }'/>
               </ul>
           </PrimaryCard>
         </div>
@@ -89,11 +95,12 @@
 import Layout from '@/components/Layout/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import LinkButton from '@/components/Button/LinkButton.vue';
+import List from '@/components/List/List.vue';
 
 export default {
   name: 'dashboard',
   components: {
-    Layout, PrimaryCard, LinkButton,
+    Layout, PrimaryCard, LinkButton, List,
   },
 };
 
@@ -138,36 +145,7 @@ export default {
     min-height: 450px;
     .heading{
       font-weight:600;
-      font-size:1.3rem;
-    }
-    li{
-      display:block;
-      a{
-        border-bottom: 1px solid #eee;
-        padding:15px 0;
-        display:block;
-        font-size:0.9rem;
-        transition: 0.5s;
-        font-weight:500;
-        span{
-          background: #eee;
-          padding:5px 10px;
-          margin-right:5px;
-          margin-top:-2px;
-          display:inline-block;
-          border-radius: 100%;
-          color:rgb(184, 179, 179)
-        }
-        .time{
-          color:rgb(88, 86, 86);
-          font-size: 0.6rem;
-          letter-spacing: 0.03rem;
-          margin-left:50px;
-        }
-        &:hover{
-          background: #eee;
-        }
-      }
+      font-size:1.3rem
     }
   }
 }
