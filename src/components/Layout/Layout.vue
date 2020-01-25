@@ -51,7 +51,7 @@ export default {
 
   .app-content{
     margin:0 auto;
-    max-width:1150px;
+    max-width:1200px;
     padding:10px 15px;
     padding-top:90px;
     min-height:500px;

@@ -113,7 +113,10 @@ export default {
   z-index:999;
   background:#fff;
   position:fixed;
-
+  @include MQ($breakpoint-md){
+    width:100%;
+    left:0;
+  }
 }
 .app-header{
     width:100%;

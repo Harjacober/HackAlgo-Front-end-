@@ -17,9 +17,6 @@
                         <li>
                             <router-link to="/problem-set" class="ripple"><i class='uil uil-science'></i> Problem Set</router-link>
                         </li>
-                         <li>
-                            <router-link to="/leaderboard" class="ripple"><i class='uil uil-no-entry'></i> LeaderBoard</router-link>
-                        </li>
                     </ul>
                 </nav>
             </div>
@@ -36,10 +33,11 @@ export default {
 .app-layout__sidebar{
     background:$primary-color;
     position:relative;
+    background: #fff;
     width:250px;
     height:100vh;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     @include MQ($breakpoint-md){
       display:none;
     }
@@ -51,7 +49,7 @@ export default {
     }
     .logo-container{
       padding:0 10px;
-      color:#fff;
+      // color:#fff;
       margin:20px 0;
       font-weight:700;
       font-size:1.6rem;
@@ -80,7 +78,7 @@ export default {
         display:block;
         a{
           display:block;
-          color:#fff;
+          // color:#fff;
           font-weight:500;
           padding:10px 16px;
           margin:5px 0;
@@ -96,13 +94,13 @@ export default {
           }
 
           &:hover{
-            background:rgba(0,0,0,0.3);
+            background:#eee;
           }
         }
         a.active{
-          background:rgba(0,0,0,0.1);
+          background:#eee;
           &:hover{
-            background:rgba(0,0,0,0.3);
+            background:rgb(224, 223, 223);
           }
         }
       }

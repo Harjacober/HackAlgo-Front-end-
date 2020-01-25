@@ -36,9 +36,9 @@ export default {
         display:block;
     }
     a.active{
-        color:$primary-color;
+        color:$secondary-color;
         font-weight:500;
-        border-bottom:3px solid $primary-color;
+        border-bottom:3px solid $secondary-color;
         background:rgba(0,0,0,0.01)
     }
 }
