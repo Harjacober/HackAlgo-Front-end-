@@ -20,7 +20,6 @@ export default {
 <style lang="scss" scoped>
 
 .settings-nav{
-    // padding:7px 0px;
     background:#fff;
     border-radius:6px;
     margin:10px 0;
@@ -34,6 +33,11 @@ export default {
         padding:18px;
         font-size:1rem;
         display:block;
+        @include MQ($breakpoint-md){
+            font-size:0.8rem;
+            padding:18px 5px;
+            font-weight:500;
+        }
     }
     a.active{
         color:$secondary-color;

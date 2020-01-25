@@ -2,24 +2,24 @@
   <Layout pageName="Dashboard">
     <div class="dashboard">
       <div class="flex flex-wrap">
-        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
+        <div class="w-full md:w-full lg:w-1/2 xl:w-1/2">
           <PrimaryCard classNames='green-card flex flex-wrap'>
-            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 flex middle">
+            <div class="w-full md:w-full lg:w-1/2 xl:w-1/2 flex middle">
               <img src="@/assets/svg/contests-x.svg" class="img">
             </div>
-            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content">
+            <div class="w-full md:w-full lg:w-1/2 xl:w-1/2 content">
               <h3 class="heading"> Contests </h3>
               <p class="text">We've run 919 contests with 15083 winners to date. Join the winner's circle! Publish your project to enter one of our current contests for your chance to win a ...</p>
               <LinkButton to="/contests" type='white'> Get Started </LinkButton>
             </div>
           </PrimaryCard>
         </div>
-        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 ">
+        <div class="w-full md:w-full lg:w-1/2 xl:w-1/2 ">
            <PrimaryCard classNames='flex flex-wrap'>
-            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 flex middle">
+            <div class="w-full md:w-full lg:w-1/2 xl:w-1/2 flex middle">
               <img src="@/assets/svg/contests-xx.svg" class="img">
             </div>
-            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content">
+            <div class="w-full md:w-full lg:w-1/2 xl:w-1/2 content">
               <h3 class="heading"> Practice problems </h3>
               <p class="text">We've run 919 contests with 15083 winners to date. Join the winner's circle! Publish your project to enter one of our current contests for your chance to win a ...</p>
               <LinkButton to="/problem-set" type='secondary'> Get Started </LinkButton>

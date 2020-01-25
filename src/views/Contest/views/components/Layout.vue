@@ -1,7 +1,7 @@
 <template>
-   <div class="contest-app__layout" :class='pageClassName'>
-      <!-- <Sidebar /> -->
-     <Header :headerTitle='headerTitle' :headerTimer='headerTimer'/>
+   <div class="contest-app__layout" :class='pageClassName' >
+      <Sidebar :isMobileOpen='isMobileSidebarOpen' @closeSidebar='closeSidebar'/>
+     <Header :headerTitle='headerTitle' :headerTimer='headerTimer' @openSidebar='openSidebar'/>
         <main class="contest-app__layout__main">
             <Nav />
             <slot></slot>
@@ -13,12 +13,13 @@
 <script>
 import Header from '@/components/Header/Header.vue';
 import Footer from '@/components/Footer/Footer.vue';
+import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import Nav from './Nav.vue';
 
 export default {
   name: 'contest-layout',
   components: {
-    Header, Footer, Nav,
+    Header, Footer, Nav, Sidebar,
   },
   props: {
     pageName: {
@@ -32,7 +33,19 @@ export default {
     headerTitle: String,
     headerTimer: String,
   },
-  methods: {},
+  methods: {
+    closeSidebar() {
+      this.isMobileSidebarOpen = false;
+    },
+    openSidebar() {
+      this.isMobileSidebarOpen = true;
+    },
+  },
+  data() {
+    return {
+      isMobileSidebarOpen: false,
+    };
+  },
 
 };
 </script>
@@ -43,9 +56,15 @@ export default {
     background:$bg-primary-color;
     min-height:100vh;
     background:#fff;
+    .app-layout__sidebar{
+      display:none;
+    }
     .header{
         width:100%;
         left:0;
+        .harmburger-btn{
+          display:block;
+        }
     }
     .contest-app__layout__main{
         padding:10px 0;
