@@ -35,26 +35,26 @@
               <h3 class='heading'>Problem Set</h3>
               <div class='content'>
                   <ul class='list'>
-                  <li >
-                    <a href='#' >
-                      <span><i class='uil uil-arrow'></i></span> Robinson Crusoe
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span><i class='uil uil-arrow'></i></span> String reverse
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span><i class='uil uil-arrow'></i></span> Dynamic array manipualtion
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span><i class='uil uil-arrow'></i></span> ZipZap
-                    </a>
-                  </li>
+                   <List :item='{
+                      code: true,
+                      text: "Round Robin",
+                      url: "#"
+                  }'/>
+                  <List :item='{
+                      code: true,
+                      text: "String Reverse",
+                      url: "#"
+                  }'/>
+                  <List :item='{
+                      code: true,
+                      text: "Dynamic Array manipulation",
+                      url: "#"
+                  }'/>
+                  <List :item='{
+                      code: true,
+                      text: "ZipZap",
+                      url: "#"
+                  }'/>
                 </ul>
               </div>
             </div>
@@ -62,30 +62,30 @@
               <h3 class='heading'>Contests</h3>
               <div class='content'>
                 <ul class='list'>
-                  <li >
-                    <a href='#' >
-                      <span>(*)</span> Google uplabs challenge
-                      <p class='time'>January , 15th, 2020 - 4hrs</p>
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span>(*)</span> Aganifa challenge
-                      <p class='time'>January , 15th, 2020 - 4hrs</p>
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span>(*)</span> hashmap 2020
-                      <p class='time'>January , 15th, 2020 - 4hrs</p>
-                    </a>
-                  </li>
-                  <li >
-                    <a href='#'>
-                      <span>(*)</span> Futa Supercoder club
-                      <p class='time'>January , 15th, 2020 - 4hrs</p>
-                    </a>
-                  </li>
+                  <List :item='{
+                    contest: true,
+                    text: "Google uplabs challenge",
+                    date: "January , 15th, 2020 - 4hrs",
+                    url: "#"
+                  }'/>
+                  <List :item='{
+                    contest: true,
+                    text: "Futa codemental club 2020",
+                    date: "January , 15th, 2020 - 4hrs",
+                    url: "#"
+                  }'/>
+                  <List :item='{
+                    contest: true,
+                    text: "Aganifa challenge",
+                    date: "January , 15th, 2020 - 4hrs",
+                    url: "#"
+                  }'/>
+                  <List :item='{
+                    contest: true,
+                    text: "hashmap 2020",
+                    date: "January , 15th, 2020 - 4hrs",
+                    url: "#"
+                  }'/>
                 </ul>
               </div>
             </div>
@@ -99,12 +99,14 @@
 <script>
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Layout from '@/components/Layout/Layout.vue';
+import List from '@/components/List/List.vue';
 
 export default {
   name: 'profile',
   components: {
     Layout,
     PrimaryCard,
+    List,
   },
   data() {
     return {
@@ -187,40 +189,6 @@ export default {
     }
     .content{
       min-height: 200px;
-      li{
-        display:block;
-        a{
-          border-bottom: 1px solid #eee;
-          padding:15px 0;
-          display:block;
-          font-size:0.9rem;
-          transition: 0.5s;
-          font-weight:500;
-          span{
-            background: #eee;
-            padding:5px 10px;
-            margin-right:5px;
-            margin-top:-2px;
-            display:inline-block;
-            border-radius: 100%;
-            color:rgb(184, 179, 179);
-            .uil{
-              font-size:1.1rem;
-              padding:2px 0;
-              display:inline-block;
-            }
-          }
-          .time{
-            color:rgb(88, 86, 86);
-            font-size: 0.6rem;
-            letter-spacing: 0.03rem;
-            margin-left:50px;
-          }
-          &:hover{
-            background: #eee;
-          }
-        }
-      }
     }
   }
 }

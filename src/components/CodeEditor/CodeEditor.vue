@@ -26,7 +26,7 @@ export default {
         background:#fff;
     }
     .code-editor{
-        min-height:400px;
+        min-height:500px;
         border-radius:0 0 5px 5px;
         background-color: #1c2434;
     }

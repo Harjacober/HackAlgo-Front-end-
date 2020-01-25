@@ -1,8 +1,8 @@
 <template>
   <div class="app-layout">
-      <Sidebar />
+      <Sidebar :isMobileOpen='isMobileSidebarOpen' @closeSidebar='closeSidebar'/>
       <main class="app-layout__main">
-        <Header />
+        <Header @openSidebar='openSidebar'/>
           <div class="app-content">
             <h4 class="heading"> {{ pageName }}</h4>
             <slot></slot>
@@ -28,8 +28,19 @@ export default {
       default: '',
     },
   },
-  methods: {},
-
+  methods: {
+    closeSidebar() {
+      this.isMobileSidebarOpen = false;
+    },
+    openSidebar() {
+      this.isMobileSidebarOpen = true;
+    },
+  },
+  data() {
+    return {
+      isMobileSidebarOpen: false,
+    };
+  },
 };
 </script>
 

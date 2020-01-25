@@ -3,12 +3,20 @@
         <div class="app-header">
             <div class="app-header__panel">
                 <div class="app-header__left flex">
-                    <button class="harmburger-btn btn reset-btn">
+                    <button class="harmburger-btn btn reset-btn" @click="$emit('openSidebar')">
                         <i class='uil uil-bars'></i>
                     </button>
+                    <h3 class='title' v-if='headerTitle'> {{ headerTitle }}</h3>
+                    <div class='search-form flex' v-if='!headerTitle'>
+                      <i class='uil uil-search search-icon'></i>
+                      <input class='form-control' placeholder='Search' />
+                    </div>
                 </div>
                 <nav class="app-header__nav to-right">
                     <ul >
+                            <li class='timer list' v-if='headerTimer'>
+                              <i class='uil uil-clock-three'></i>{{ headerTimer }}
+                            </li>
                             <li class="profile list">
                                 <div class="flex"   @click="toggleDropdown" ref="profileToggleNode">
                                     <img src="/assets/myAvatar.png" class="profile-image" alt="profile image"/>
@@ -37,26 +45,6 @@
                 </nav>
             </div>
         </div>
-        <!-- <div class="header-menu">
-            <div class="header-menu__panel">
-                <div v-if="viewContent" >
-                    <router-link to="/" class="back-button reset-btn">
-                        <i class='uil uil-angle-left'></i> Go home
-                    </router-link>
-                </div>
-                <ul class="" v-else>
-                    <li >
-                        <router-link to="/dashboard" > <i class='uil uil-rss'></i> Dashboard</router-link>
-                    </li>
-                    <li >
-                        <router-link to="/problem-set"><i class='uil uil-analytics'></i> ProblemSet</router-link>
-                    </li>
-                    <li >
-                        <router-link to="/contests"><i class='uil uil-cog'></i> Contests</router-link>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
     </header>
 </template>
 <script>
@@ -74,9 +62,13 @@ export default {
         };
     },
     props: {
-        viewContent: {
-            type: Boolean,
-            default: false,
+        headerTitle: {
+            type: String,
+            default: null,
+        },
+         headerTimer: {
+            type: String,
+            default: null,
         },
     },
     mounted() {
@@ -141,8 +133,17 @@ export default {
         border:none;
         font-size:1.5rem;
         cursor:pointer;
+        display:none;
         outline:none;
         transition:0.233s cubic-bezier(0.215, 0.610, 0.355, 1);
+        @include MQ($breakpoint-md){
+          display:block;
+        }
+      }
+      .title{
+        padding:15px;
+        font-weight: 500;
+        font-size: 1.1rem;
       }
       .search-form{
         padding:5px;
@@ -154,20 +155,21 @@ export default {
           padding:17px 15px;
           position:absolute;
           left:3px;
-          top:5px;
+          top:-2px;
+          opacity:0.6;
         }
         .form-control{
-          padding:10px 14px;
+          padding:5px 14px;
           font-size:0.8rem;
           padding-left:40px;
-          border-radius:50px;
-          background-color: #ebeff5 !important;
-          border-radius: 100px;
+          color:rgb(48, 47, 47);
+          font-weight:400;
+          border-radius:5px;
+          background:rgb(243, 243, 243);
           border: 1px solid $bg-primary-color;
           transition:.1s cubic-bezier(.4,1,.75,.9);
           &:hover{
-            box-shadow:0 3px 9px 0 rgba(0,0,0,0.05);
-            border:1px solid #cccccc;
+            border:1px solid #dadada;
           }
         }
       }
@@ -176,6 +178,22 @@ export default {
       padding:10px;
       li.list{
         display:inline-block;
+        &.timer{
+          letter-spacing: 0.05rem;
+          font-weight:600;
+          position: relative;
+          top:-10px;
+          box-shadow: 0 5px 20px 0 rgba(0,0,0,0.2);
+          border-radius:5px;
+          padding:7px 20px;
+          border:1px solid $primary-color;
+          background:$primary-color;
+          color:#3fe065;
+          .uil{
+            font-size:1.1rem;
+            margin-right:3px;
+          }
+        }
         a.link{
           display:block;
           padding:6px;
@@ -211,52 +229,4 @@ export default {
       }
     }
   }
-
-.header-menu{
-  // background:#fff;
-  position:relative;
-  display:none;
-  margin-top:4px;
-  .header-menu__panel{
-    margin:0 auto;
-    max-width:1000px;
-  }
-  .back-button{
-    padding:20px 0px;
-    border:none;
-    font-size:1rem;
-    display:inline-block;
-    font-weight:600;
-    cursor:pointer;
-    transition:cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
-      opacity:0.7;
-    &:hover{
-      color:$primary-color;
-        opacity:1;
-    }
-  }
-  li{
-    display:inline-block;
-    a{
-      color:#000;
-      padding:20px 55px;
-      // margin-right:30px;
-      font-weight:600;
-      display:block;
-      letter-spacing:0.02rem;
-      font-size:0.8rem;
-      transition:cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
-      opacity:0.7;
-      &:hover{
-        color:$primary-color;
-        opacity:1;
-      }
-    }
-    a.is-active{
-      border-bottom:3px solid $primary-color;
-      color:$primary-color;
-      background:$bg-primary-color;
-    }
-  }
-}
 </style>

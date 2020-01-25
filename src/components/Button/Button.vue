@@ -1,11 +1,11 @@
 <template>
-    <router-link :to="to" class="btn link-button ripple" :class='(type)? type : "primary"'>
+    <button class="btn button ripple" :class='(type)? type : "primary"'>
     <slot />
-    </router-link>
+    </button>
 </template>
 <script>
 export default {
-    name: 'link-button',
+    name: 'button',
     props: {
         to: {
             type: String,
@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss">
 
-.link-button{
+.button{
     padding:10px 20px;
     box-shadow:0 5px 10px 0 rgba(0,0,0,0.1);
     font-weight:600;
@@ -26,6 +26,7 @@ export default {
     letter-spacing:0.04rem;
     color:#fff;
     font-weight:500;
+    outline: none;
     opacity:1;
     transition:0.3s;
     i{
@@ -34,16 +35,27 @@ export default {
     }
     &.primary{
         background:$primary-color;
+        border:1px solid $primary-color;
     }
     &.secondary{
         background:$secondary-color;
+        border:1px solid $secondary-color;
     }
     &.white{
         background: #fff;
         color:$secondary-color;
+        border:1px solid #fff;
         &:hover{
             box-shadow:0 10px 18px 0 rgba(0,0,0,0.2);
             background: #000;
+        }
+    }
+    &.outlined{
+        color:$secondary-color;
+        background:#fff;
+        border:1px solid $secondary-color;
+        &:hover{
+           color:#fff;
         }
     }
     &:hover{

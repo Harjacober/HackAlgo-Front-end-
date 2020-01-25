@@ -1,6 +1,6 @@
 @import "../../styles/common.scss";
 
-.dialog-backdrop {
+.modal-backdrop {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -14,7 +14,7 @@
     will-change: opacity;
     transition: opacity 0.233s cubic-bezier(0, 0, 0.21, 1);
 }
-.dialog-container__panel{
+.modal-container__panel{
     position:relative;
     overflow-y:auto;
     height:100vh;
@@ -28,7 +28,7 @@
     width:100%;
     background: none;
 }
-.dialog{
+.modal{
     margin:0 auto;
     border-radius:10px;
     // max-width:450px;
@@ -53,15 +53,15 @@
               }
 }
 
-  .dialog-header,
-  .dialog-footer {
+  .modal-header,
+  .modal-footer {
     padding: 15px;
     .btn{
         transition:cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
     }
   }
 
-  .dialog-header {
+  .modal-header {
     border-bottom: 1px solid #eeeeee;
     color: #000;
     .btn.back-btn{
@@ -74,10 +74,10 @@
         }
     }
   }
-  .dialog-body{
+  .modal-body{
       padding:20px;
   }
-  .dialog-footer {
+  .modal-footer {
     border-top: 1px solid #eeeeee;
     span.btn{
         font-size:0.9rem;
