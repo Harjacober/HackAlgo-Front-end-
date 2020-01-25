@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { Login, Register, Recover, ChangePassword } from '@/views/Auth';
-import Contests from '@/views/Contests/Contests.vue';
+import { Contests, Contest, ScoreBoard, ContestInformation } from '@/views/Contest';
 import Dashboard from '@/views/Dashboard/Dashboard.vue';
 import Profile from '@/views/Profile/Profile.vue';
 import { BasicInformation, ChangePassword as ChangeSettingsPassword } from '@/views/Settings';
+import { Problem, ProblemSet } from '@/views/Problem';
 
 Vue.use(VueRouter);
 
@@ -68,6 +69,31 @@ const routes = [
     path: '/contests',
     name: 'contests',
     component: Contests,
+  },
+  {
+    path: '/contests/:slug',
+    name: 'contest-information',
+    component: ContestInformation,
+  },
+  {
+    path: '/contests/:slug/problem-set',
+    name: 'contest',
+    component: Contest,
+  },
+  {
+    path: '/contests/:slug/scoreboard',
+    name: 'contest',
+    component: ScoreBoard,
+  },
+  {
+    path: '/problem-set',
+    name: 'problem-set',
+    component: ProblemSet,
+  },
+  {
+    path: '/problem-set/:slug/solve',
+    name: 'problem',
+    component: Problem,
   },
   {
     path: '*',

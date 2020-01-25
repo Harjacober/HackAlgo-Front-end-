@@ -10,6 +10,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer{
+    padding:50px 10px;
     .text{
         font-size:0.8rem;
         font-weight:500;

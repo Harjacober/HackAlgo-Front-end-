@@ -20,9 +20,9 @@ export default {
 .primary-card{
     background:#fff;
     border-radius:6px;
-    box-sizeing:border-box;
+    box-sizing:border-box;
     margin:10px;
-    box-shadow:0 3px 5px 0 rgba(0,0,0,0.07);
+    box-shadow:0 3px 6px 0 rgba(0,0,0,0.05);
     min-height:150px;
 }
 </style>

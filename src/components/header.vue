@@ -1,5 +1,5 @@
 <template>
-    <header class="flex flex-no-wrap w-full overflow-x-hidden justify-between px-5 lg:px-20">
+    <header class="page-header flex flex-no-wrap w-full overflow-x-hidden justify-between px-5 lg:px-20">
         <div class="flex flex-col items-center w-full overflow-hidden flex-no-wrap
             lg:flex-row">
             <div class="logo-holder p-3">
@@ -11,10 +11,9 @@
                     lg:overflow-x-hidden lg:ml-20">
                     <router-link to="/">Home</router-link>
                     <router-link to="/about">About</router-link>
-                    <router-link to="/home">Problemset</router-link>
+                    <router-link to="/problem-set">Problemset</router-link>
                     <router-link to="/dashboard">Dashboard</router-link>
                     <router-link to="/settings">Settings</router-link>
-                    <router-link to="/home">Help</router-link>
                 </menu>
             </div>
         </div>
@@ -26,28 +25,29 @@
     </header>
 </template>
 <style lang="scss" scoped>
-header {
+.page-header {
     background: $primary-color;
-    min-height: 50px;
+    min-height: 80px;
 }
 .logo-holder {
     color: #FFF;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
     text-transform: uppercase;
-    ::after {
+    position: relative;
+    width:200px;
+    :after {
         content: '';
-        display: inline-block;
-        width: 3px; height: 15px;
+        width:3px;
+        height: 15px;
+        position: absolute;
         background-color: rgb(3, 224, 114);
-        margin-left: 5px;
+        margin-left: 10px;
+        top:14px;
     }
 }
 .menu {
     a {
         padding: 5px 15px;
-        color: #e1eaff;
+        color: #fff;
         font-size: 15px;
         text-transform: capitalize;
     }
