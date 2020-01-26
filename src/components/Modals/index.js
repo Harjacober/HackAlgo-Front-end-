@@ -1,8 +1,8 @@
-import ComposeDialog from './ComposeDialog.vue';
-import Dialog from './Dialog.vue';
+import JoinContestModal from './JoinContestModal.vue';
+import Modal from './Modal.vue';
 import './styles.scss';
 
 export {
-    ComposeDialog,
-    Dialog,
+    JoinContestModal,
+    Modal,
 };
