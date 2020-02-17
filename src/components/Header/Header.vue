@@ -20,7 +20,7 @@
                             <li class="profile list">
                                 <div class="flex"   @click="toggleDropdown" ref="profileToggleNode">
                                     <img src="/assets/myAvatar.png" class="profile-image" alt="profile image"/>
-                                    <p class="name">akinola!</p>
+                                    <p class="name"> {{ currentUser.username}}</p>
                                 </div>
                                 <dropdown
                                     :isDropdownOpen="isDropdownOpen"
@@ -33,10 +33,10 @@
                                         <router-link to="/settings"><i class="uil uil-cog"></i> Settings </router-link>
                                     </li>
                                      <li>
-                                        <router-link to="/profile"><i class="uil uil-cog"></i> Profile </router-link>
+                                        <router-link :to="'/profile/'+currentUser.username"><i class="uil uil-cog"></i> Profile </router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/logout"><i class="uil uil-exit"></i> Logout</router-link>
+                                        <span @click='logout'><i class="uil uil-exit"></i> Logout</span>
                                     </li>
                                 </ul>
                                 </dropdown>
@@ -48,6 +48,7 @@
     </header>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import Dropdown from '../Dropdown/Dropdown.vue';
 
 export default {
@@ -74,6 +75,9 @@ export default {
     mounted() {
         this.profileToggleNode = this.$refs.profileToggleNode;
     },
+    computed: {
+        ...mapGetters(['currentUser', 'authFeedback']),
+    },
     methods: {
         setStyles() {
             return {
@@ -90,6 +94,16 @@ export default {
         },
         hideDropdown() {
             this.isDropdownOpen = false;
+        },
+        logout(e) {
+          e.preventDefault();
+          this.$store.dispatch('LOGOUT', {});
+        },
+    },
+    watch: {
+        authFeedback(newValue) {
+          this.$toaster.success(newValue.message);
+          this.$router.push('/login');
         },
     },
 };
@@ -213,7 +227,7 @@ export default {
         border-radius:50px;
         position:relative;
         cursor:pointer;
-        top:1px;
+        top:8px;
         .name{
           font-weight:400;
           font-size:0.9rem;

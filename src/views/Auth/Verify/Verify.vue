@@ -4,25 +4,16 @@
         <div class='auth-content'>
             <div class='auth-content__panel'>
             <div class='auth-content__top text-center'>
-                <h4 class='heading '>Register</h4>
-                <p class='text '> <i class='uil uil-padlock'></i> Create a free account</p>
+                <h4 class='heading '>Verify</h4>
+                <p class='text '>
+                    Hello!, We sent a 11-digit verification code to your email address
+                    <span v-if='this.currentUser.email'>({{ this.currentUser.email || ''}})</span>.
+                    Enter the code below
+                </p>
             </div>
             <ValidationObserver v-slot='{ handleSubmit }'>
                 <form @submit.prevent='handleSubmit(onSubmit)'>
-                    <ValidationProvider :rules='formControls.username.validationRules' v-slot='{ errors }' name='username'>
-                        <TextInput
-                            :label='formControls.username.label'
-                            name='username'
-                            v-model='formControls.username.value'
-                            required
-                            autocomplete='off'
-                            interfaceClass='black'
-                            :error='errors[0]'
-                            :placeholder='formControls.username.placeholder'
-                        >
-                        </TextInput>
-                    </ValidationProvider>
-                    <ValidationProvider :rules='formControls.email.validationRules' v-slot='{ errors }' name='email'>
+                    <ValidationProvider :rules='formControls.email.validationRules' v-slot='{ errors }' name='email' v-if='currentUser.email'>
                         <TextInput
                             :label='formControls.email.label'
                             name='email'
@@ -31,32 +22,31 @@
                             autocomplete='off'
                             :error='errors[0]'
                             interfaceClass='black'
+                            :hidden='(!currentUser.email)? true : false'
                             :placeholder='formControls.email.placeholder'
+                            :disabled='(currentUser.email)? true : false'
                         >
                         </TextInput>
                     </ValidationProvider>
-                    <ValidationProvider :rules='formControls.password.validationRules' v-slot='{ errors }' name='password'>
-                        <PasswordInput
-                        :label='formControls.password.label'
-                            name='password'
-                            v-model='formControls.password.value'
+                    <ValidationProvider :rules='formControls.code.validationRules' v-slot='{ errors }' name='code'>
+                        <TextInput
+                          :label='formControls.code.label'
+                            name='code'
+                            v-model='formControls.code.value'
                             interfaceClass='black'
                             required
                             :error='errors[0]'
-                            :placeholder='formControls.password.placeholder'
+                            :placeholder='formControls.code.placeholder'
                         >
-                        </PasswordInput>
+                        </TextInput>
                     </ValidationProvider>
                     <Button
-                        value='Register'
+                        value='Verify'
                         :isLoading='isLoading'
                     >
                     </Button>
                 </form>
             </ValidationObserver>
-             <div class='auth-content__bottom text-center'>
-                <p class='text '>Already have an account? <router-link to='/login'>Login</router-link></p>
-            </div>
             </div>
         </div>
     </div>
@@ -64,25 +54,24 @@
 <script >
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { mapGetters } from 'vuex';
-import { TextInput, Button, PasswordInput } from '@/components/Form';
+import { TextInput, Button } from '@/components/Form';
 
 export default {
     name: 'register',
     components: {
         TextInput,
         Button,
-        PasswordInput,
         ValidationProvider,
         ValidationObserver,
     },
     data() {
         return {
             formControls: {
-                username: {
+                code: {
                     value: '',
-                    label: 'Username',
+                    label: 'verification Code',
                     touched: false,
-                    placeholder: 'E.g coderarc',
+                    placeholder: '0xxxxxxxxxx',
                     validationRules: {
                         required: true,
                     },
@@ -91,25 +80,18 @@ export default {
                     value: '',
                     label: 'Email address',
                     touched: false,
-                    placeholder: 'e.g joe@example.com',
+                    placeholder: 'e.g ay@example.com',
                     validationRules: {
                         required: true,
                         email: true,
                     },
                 },
-                password: {
-                    value: '',
-                    label: 'Password',
-                    touched: false,
-                    placeholder: '***********',
-                    validationRules: {
-                        required: true,
-                        min: 6,
-                    },
-                },
             },
             isLoading: false,
         };
+    },
+    mounted() {
+        this.formControls.email.value = this.currentUser.email || '';
     },
     computed: {
         ...mapGetters(['currentUser', 'authFeedback']),
@@ -118,11 +100,9 @@ export default {
         onSubmit(e) {
             this.isLoading = true;
             const data = {
-                username: this.formControls.username.value,
-                email: this.formControls.email.value,
-                pswd: this.formControls.password.value,
+                id: this.formControls.code.value,
             };
-            this.$store.dispatch('REGISTER', data);
+            this.$store.dispatch('VERIFY', data);
         },
     },
     watch: {
@@ -131,9 +111,9 @@ export default {
             if (newValue.error) {
                 this.$toaster.error(newValue.message || 'Whoops something went wrong');
             } else {
-                this.$toaster.success(newValue.message || 'Successfully registered');
+                this.$toaster.success(newValue.message || 'Successfully verified');
                 setTimeout(() => {
-                    this.$router.push('/verify');
+                    this.$router.push('/login');
                 }, 500);
             }
         },

@@ -1,11 +1,11 @@
 <template>
      <PrimaryCard classNames='problem-card'>
         <router-link :to='item.url'>
-            <p class='level'> Dificulty: <span>{{ item.dificulty }}</span></p>
+            <p class='level'> Dificulty: <span>{{ item.difficulty }}</span></p>
             <h3 class='title'> {{ item.title }} </h3>
             <ul class='tags'>
                 <li v-for="tag in item.tags" :key='tag'>
-                    <a href="#"> {{ tag }}</a>
+                    <router-link :to='setUrl(tag)'> {{ tag }}</router-link>
                 </li>
             </ul>
         </router-link>
@@ -33,6 +33,11 @@ export default {
             default: () => { },
         },
     },
+    methods: {
+        setUrl(tag) {
+            return `/problem-set?tag=${tag}`;
+        },
+    },
 };
 </script>
 
@@ -46,7 +51,7 @@ export default {
     .title{
         font-size: 1.4rem;
         color:#000;
-        font-weight:500;
+        font-weight:600;
     }
     .level{
         padding-top:10px;

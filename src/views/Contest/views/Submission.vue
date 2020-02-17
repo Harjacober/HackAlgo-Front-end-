@@ -7,6 +7,7 @@
             <th class="px-4 py-2 text-left">S/N</th>
             <th class="px-4 py-2 text-left">Title</th>
             <th class="px-4 py-2 text-left">Summary</th>
+            <th class="px-4 py-2 text-left"> Status </th>
             <th class="px-4 py-2 text-left">Solution</th>
           </tr>
         </thead>
@@ -17,6 +18,9 @@
             <td class="border px-4 py-2 text-left summary">
               Robinson Crusoe decides to explore his isle. On a sheet of paper he plans the following process
               sheet of paper he plans the following processsheet of paper he plans the following process
+            </td>
+            <td class="border px-4 py-2 text-left passed">
+             passed
             </td>
             <td class="border px-4 py-2 text-left">
               <Button type ='secondary'> View Problem</Button>
@@ -29,6 +33,9 @@
             <td class="border px-4 py-2 text-left summary">
               Robinson Crusoe decides to explore his isle. On a sheet of paper he plans the following process
             </td>
+            <td class="border px-4 py-2 text-left failed">
+             failed
+            </td>
             <td class="border px-4 py-2 text-left">
               <Button type ='secondary'> View Problem</Button>
               <Button type ='outlined'> View Solution</Button>
@@ -39,6 +46,9 @@
             <td class="border px-4 py-2 text-left title w-1/5">Robinson Crusoe</td>
             <td class="border px-4 py-2 text-left summary">
               Robinson Crusoe decides to explore his isle. On a sheet of paper he plans the following process
+            </td>
+            <td class="border px-4 py-2 text-left passed">
+             passed
             </td>
             <td class="border px-4 py-2 text-left">
               <Button type ='secondary'> View Problem</Button>
@@ -79,6 +89,12 @@ export default {
     font-size:0.8rem;
     font-weight:500;
     line-height: 1.7rem
+  }
+  .passed{
+    color:$secondary-color;
+  }
+  .failed{
+    color:$red
   }
 }
 </style>

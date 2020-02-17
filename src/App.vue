@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { isAuthenticated } from '@/helpers/auth';
 
 export default {
   name: 'app',
@@ -12,6 +13,7 @@ export default {
     setTimeout(() => {
        this.$progress.done();
     }, 4000);
+    this.$store.dispatch('CURRENT_USER', isAuthenticated());
   },
   created() {
     //  [App.vue specific] When App.vue is first loaded start the progress bar
@@ -35,8 +37,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700,600,500,400,300,100|Roboto:600,500,400,300,100&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700,600,500,400,300,100|Muli:300,400,500,600,700&display=swap');
 *{
   margin:0;
   padding:0;
@@ -44,7 +45,7 @@ export default {
 }
 
 body {
-    font-family:$font-family-monserrat;
+    font-family:$font-family-muli;
     overflow-x:hidden;
     #nprogress .bar {
       background: #fff;
@@ -57,7 +58,7 @@ body {
 }
 
 h1, h2, h3, h4, h5,h6{
-  font-family:$font-family-segoe;
+  font-family:$font-family-muli;
 }
 
 html, body, div, span, iframe,
@@ -189,7 +190,7 @@ html, body, div, span, iframe,
       transition: box-shadow 0.2s ease 0s, opacity 0.2s ease 0s;
       cursor:pointer;
       white-space: nowrap;
-      font-family:$font-family-monserrat;
+      font-family:$font-family-muli;
   }
   .reset-btn{
     margin:0;
@@ -237,47 +238,6 @@ html, body, div, span, iframe,
    color:#fff;
  }
 
-  .col-s-20{
-    width:20%;
-  }
-  .col-s-30{
-    width:30%;
-  }
-  .col-s-33{
-    width:33%;
-  }
-  .col-s-40{
-    width:40%;
-  }
-  .col-s-50{
-    width:50%;
-  }
-  .col-s-60{
-    width:60%;
-  }
-  .col-s-70{
-    width:70%;
-  }
-  .col-s-80{
-    width:80%;
-  }
-  .col-s-100{
-    width:100%;
-  }
-
-  .col-s-20, .col-s-30, .col-s-33, col-s-40{
-    @include MQ($breakpoint-lg){
-      width:50%;
-    }
-    @include MQ($breakpoint-sm){
-      width:100%;
-    }
-  }
-  .col-s-50, .col-s-60,.col-s-70, .col-s-80{
-    @include MQ($breakpoint-md){
-      width:100%;
-    }
-  }
   /* customize button*/
 .ripple{
   overflow:hidden;

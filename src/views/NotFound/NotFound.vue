@@ -39,6 +39,9 @@ export default {
     background:$primary-color;
     .not-found-img__wrapper{
         padding:30px;
+        img{
+             width:100%;
+        }
     }
     .content{
         padding:100px 10px;

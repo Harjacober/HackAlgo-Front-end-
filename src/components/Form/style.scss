@@ -17,7 +17,7 @@
     font-weight:600;
     display:block;
     font-size:0.8rem;
-    font-family:$font-family-monserrat;
+    font-family:$font-family-muli;
     padding:2px 0;
     letter-spacing: 0.02rem;
 }
@@ -28,14 +28,19 @@
     padding:8px 11px;
     line-height:2rem;
     width:100%;
-    font-family:$font-family-monserrat;
+    font-family:$font-family-muli;
     font-weight:500;
     font-size:0.8rem;
     outline: none;
+    &:disabled{
+        cursor: not-allowed;
+        background: rgb(236, 235, 235);
+    }
 }
 
 .form-control.is-danger{
     border:1px solid red;
+    // color:red;
 }
 
 .form-feedback.is-danger{

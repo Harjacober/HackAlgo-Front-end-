@@ -1,5 +1,5 @@
 <template>
-  <Layout :pageName='problem.title'>
+  <Layout :pageName='problem.name'>
     <div class='problem'>
       <nav class='problem-nav'>
         <ul >
@@ -8,31 +8,13 @@
           </li>
           <li > <i class='uil uil-angle-right'></i> </li>
           <li >
-            <router-link to='#' class='active'>  Robinson Crusoe</router-link>
+            <router-link :to='$route.path' class='active'> {{ problem.name }} </router-link>
           </li>
         </ul>
       </nav>
       <PrimaryCard classNames="problem-card">
-        <h4 class='heading'> instructions </h4>
-        <div class='content'>
-          Robinson Crusoe decides to explore his isle. On a sheet of paper he plans the following process.<br>
-
-          His hut has coordinates origin = [0, 0]. From that origin he walks a given distance d on a line that has a given angle ang with the x-axis. He gets to a point A. (Angles are measured with respect to the x-axis)<br><br>
-
-          From that point A he walks the distance d multiplied by a constant distmult on a line that has the angle ang multiplied by a constant angmult and so on and on.<br><br>
-
-          We have d0 = d, ang0 = ang; then d1 = d * distmult, ang1 = ang * angmult etc ...<br><br>
-
-          Let us suppose he follows this process n times. What are the coordinates lastx, lasty of the last point?<br><br>
-
-          The function crusoe has parameters;<br>
-
-          n : numbers of steps in the process<br>
-          d : initial chosen distance<br>
-          ang : initial chosen angle in degrees<br>
-          distmult : constant multiplier of the previous distance<br>
-          angmult : constant multiplier of the previous angle<br>
-        </div>
+        <h4 class='heading'> Problem Statement </h4>
+        <div class='content content-desc'></div>
       </PrimaryCard>
        <CodeEditor/>
     </div>
@@ -40,8 +22,10 @@
 </template>
 
 <script>
+import Marked from 'marked';
 import Layout from '@/components/Layout/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
+import Http from '@/helpers/http';
 import CodeEditor from '@/components/CodeEditor/CodeEditor.vue';
 
 export default {
@@ -53,10 +37,24 @@ export default {
   },
   data() {
     return {
-      problem: {
-        title: 'Robinson Crusoe',
-      },
+      problem: {},
     };
+  },
+   mounted() {
+    this.populateProblem();
+  },
+  methods: {
+    populateProblem() {
+      Http.get(`/get/problem/?prblmid=${this.$route.params.slug}`)
+      .then((response) => {
+        this.problem = response.data.data;
+        const md = new Marked.Renderer();
+        document.querySelector('.content-desc').innerHTML = Marked(this.problem.problemstatement, { renderer: md });
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+    },
   },
 };
 

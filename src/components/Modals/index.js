@@ -1,8 +1,8 @@
-import JoinContestModal from './JoinContestModal.vue';
+import RegisterContestModal from './RegisterContestModal.vue';
 import Modal from './Modal.vue';
 import './styles.scss';
 
 export {
-    JoinContestModal,
+    RegisterContestModal,
     Modal,
 };

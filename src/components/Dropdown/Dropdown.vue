@@ -106,13 +106,13 @@ export default {
         z-index:99;
         li{
             display:block;
-            a{
+            a, span{
                 padding:13px 8px;
                 color:#000;
                 display:block;
                 font-weight:500;
                 font-size:0.9rem;
-                font-family:$font-family-monserrat;
+                font-family:$font-family-muli;
                 margin:2px 0;
                 cursor: pointer;
                 transition: background-color 0.3s cubic-bezier(0, 0, 0.21, 1);

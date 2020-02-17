@@ -4,7 +4,7 @@
             <div class="app-layout-sidebar__panel sidebar-panel">
                 <div class="app-layout-sidebar__top">
                     <div class="logo-container text-center">
-                        <h4 class="logo"> HackAlgo. </h4>
+                        <h4 class="logo"> CodeGees. </h4>
                     </div>
                 </div>
                 <nav class="app-layout-sidebar__nav">

@@ -70,7 +70,7 @@ export default {
     position: fixed;
     bottom: 50px;
     right: 0;
-    z-index: 999;
+    z-index: 99999;
     width: 300px;
     padding-left: 10px;
     padding-right :10px;
@@ -106,7 +106,7 @@ export default {
             letter-spacing:0.01rem;
             color:#fff;
             font-weight: 500;
-            font-family:$font-family-monserrat
+            font-family:$font-family-montserrat
         }
         .btn-close{
             background:rgba(0,0,0,0.09);

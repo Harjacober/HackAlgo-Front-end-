@@ -3,7 +3,7 @@
         <div class="flex flex-col items-center w-full overflow-hidden flex-no-wrap
             lg:flex-row">
             <div class="logo-holder p-3">
-                <p class="text-sm">HACK-ALGO</p>
+                <p class="text-sm">CODE-GEES</p>
             </div>
             <div class=" flex w-full overflow-x-hidden">
                 <menu class="menu w-12/12 flex

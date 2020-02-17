@@ -6,7 +6,7 @@
           <PrimaryCard classNames='profile-card__left text-center profile-card'>
             <img src='/assets/myAvatar.png' class='avatar'/>
             <div class='content'>
-              <h2 class='fullname text-center'> {{ user.fullname }} </h2>
+              <h2 class='fullname text-center'> {{ user.name }} </h2>
               <h3 class='username'> <i class='uil uil-at'></i> {{ user.username }} </h3>
               <p class='email'><i class='uil uil-envelope'></i> {{ user.email }}</p>
             </div>
@@ -65,25 +65,25 @@
                   <List :item='{
                     contest: true,
                     text: "Google uplabs challenge",
-                    date: "January , 15th, 2020 - 4hrs",
+                    starttime: "January , 15th, 2020 - 4hrs",
                     url: "#"
                   }'/>
                   <List :item='{
                     contest: true,
                     text: "Futa codemental club 2020",
-                    date: "January , 15th, 2020 - 4hrs",
+                    starttime: "January , 15th, 2020 - 4hrs",
                     url: "#"
                   }'/>
                   <List :item='{
                     contest: true,
                     text: "Aganifa challenge",
-                    date: "January , 15th, 2020 - 4hrs",
+                    starttime: "January , 15th, 2020 - 4hrs",
                     url: "#"
                   }'/>
                   <List :item='{
                     contest: true,
                     text: "hashmap 2020",
-                    date: "January , 15th, 2020 - 4hrs",
+                    starttime: "January , 15th, 2020 - 4hrs",
                     url: "#"
                   }'/>
                 </ul>
@@ -100,6 +100,7 @@
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Layout from '@/components/Layout/Layout.vue';
 import List from '@/components/List/List.vue';
+import Http from '@/helpers/http';
 
 export default {
   name: 'profile',
@@ -110,15 +111,57 @@ export default {
   },
   data() {
     return {
-      user: {
-        fullname: 'Akinola Ayodeji',
-        username: 'dejavuakinola1234',
-        email: 'akinayodeji4all@gmail.com',
-      },
+      user: {},
+      problems: [],
+      contests: [],
     };
   },
+  mounted() {
+    this.populateUser();
+  },
+  methods: {
+    populateUser() {
+       /* eslint-disable */
+      Http.get(`/user/profile/?username=${this.$route.params.username}`)
+      .then((response) => {
+        this.user = response.data.data;
+        this.populateUserContests(this.user.uniqueid);
+        this.populateUserSolvedProblems();
+      })
+      .catch((error) => {
+        this.$router.push('/dashboard')
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+    },
+    populateUserSolvedProblems() {
+       /* eslint-disable */
+      Http.get(`/get/problemset/?page=1&limit=50&filter=solved`)
+      .then((response) => {
+        this.problems = response.data.data;
+        console.log(this.problems);
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+    },
+    populateUserContests(id) {
+       /* eslint-disable */
+      Http({
+        method: "get",
+        url: '/my/contest/history/',
+        params: { userid: id },
+      })
+      .then((response) => {
+        this.contests = response.data.data;
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+    },
+  },
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -138,10 +181,10 @@ export default {
     font-size:1.3rem;
     font-weight:600;
     margin-top: 20px;
-    font-family: $font-family-monserrat
+    font-family: $font-family-montserrat
   }
   .username, .email{
-    font-family: $font-family-monserrat;
+    font-family: $font-family-muli;
     font-size:0.8rem;
     font-weight:500;
     color:rgb(88, 88, 88);
