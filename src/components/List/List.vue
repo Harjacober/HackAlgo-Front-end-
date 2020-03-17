@@ -1,12 +1,12 @@
 <template>
   <li class='item-list'>
-    <a :href='item.url' >
+    <router-link :to='item.url' >
         <span v-if="item.tag">#</span>
         <span v-if="item.contest">(*)</span>
         <span v-if="item.code"><i class='uil uil-arrow'></i></span>
         {{ item.text }}
-       <p class='date' v-if='item.date'>January , 15th, 2020 - 4hrs</p>
-    </a>
+       <p class='date' v-if='item.starttime'>{{ item.starttime | moment('dddd, MMMM Do YYYY')}} - {{ item.duration | duration('as', 'hours') }}hrs</p>
+    </router-link>
   </li>
 </template>
 

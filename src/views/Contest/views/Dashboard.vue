@@ -1,5 +1,5 @@
 <template>
-  <Layout headerTitle="Robinson Crusoe" headerTimer="50Min">
+  <Layout headerTitle="Robinson Crusoe" headerTimer="2h:00m">
     <PrimaryCard classNames="contest-dasboard__card">
       <h3 class='heading'> Problem Set</h3>
        <div class='problem-set flex flex-wrap'>
@@ -36,8 +36,7 @@ export default {
       item: {
         title: 'Robinson Crusoe',
         url: '/contests/ghsusis-uwuwjs8-ksksos/dashboard/ghsusis-uwuwjs8-ksksos/solve',
-        tags: ['array', 'dst', 'hashmap', 'trees'],
-        dificulty: 'hard',
+        difficulty: 'hard',
       },
     };
   },

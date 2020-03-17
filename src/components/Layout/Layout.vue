@@ -73,4 +73,26 @@ export default {
       padding:10px 5px;
     }
   }
+.spinner-container{
+    display: inline-block !important;
+    width:100% !important;
+   .v-spinner{
+      // background:#fff;
+      display:inline-block;
+      padding:10px;
+      border-radius:10px;
+      // box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
+    }
+}
+.content-placeholder{
+  min-height: 500px;
+  padding:40px;
+  .content-placeholder__panel{
+    width:100%
+  }
+  img{
+    max-width:400px;
+    margin: 0 auto;
+  }
+}
 </style>

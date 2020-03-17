@@ -1,119 +1,140 @@
 <template>
   <Layout pageName="Settings">
-      <PrimaryCard classNames="settings">
-      <Nav />
-      <form v-on:submit.prevent="handleSubmit">
-        <div class="form-group form-profile__group flex middle flex-wrap">
-              <div class="w-1/7">
-                  <div class="profile-image__container">
-                      <img src="/assets/myAvatar.png" class="profile-image"/>
-                      <label >
-                          <input type="file" name="avatar" hidden/>
-                          <span class="edit-btn btn"> <i class="uil uil-pen"></i></span>
-                      </label>
-                  </div>
-              </div>
-              <div class="w-3/7 ">
-                  <div class="profile-details">
-                      <h3 class="name">{{formControls.fullname.value}}</h3>
-                      <p class="email">{{formControls.email.value}}</p>
-                  </div>
-              </div>
-        </div>
-         <TextInput
-            :label="formControls.fullname.label"
-            name="username"
-            v-model="formControls.fullname.value"
-            required
-            autocomplete="off"
-            interfaceClass="black"
-            :placeholder="formControls.fullname.placeholder"
-        >
-        </TextInput>
-         <TextInput
-            :label="formControls.username.label"
-            name="username"
-            v-model="formControls.username.value"
-            required
-            autocomplete="off"
-            interfaceClass="black"
-            :placeholder="formControls.username.placeholder"
-        >
-        </TextInput>
-        <TextInput
-            :label="formControls.email.label"
-            name="email"
-            v-model="formControls.email.value"
-            required
-            autocomplete="off"
-            interfaceClass="black"
-            :placeholder="formControls.email.placeholder"
-        >
-        </TextInput>
-        <Button
-            value="Save Changes"
-        >
-        </Button>
-      </form>
+    <PrimaryCard classNames="settings">
+    <Nav />
+    <ValidationObserver v-slot='{ handleSubmit }'>
+        <form @submit.prevent='handleSubmit(onSubmit)'>
+            <div class="form-group form-profile__group flex middle flex-wrap">
+                <div class="w-1/7">
+                    <div class="profile-image__container">
+                        <img src="/assets/myAvatar.png" class="profile-image"/>
+                        <label hidden>
+                            <input type="file" name="avatar" hidden/>
+                            <span class="edit-btn btn"> <i class="uil uil-pen"></i></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="w-3/7 ">
+                    <div class="profile-details">
+                        <h3 class="name">{{currentUser.username}}</h3>
+                        <p class="email">{{currentUser.email}}</p>
+                    </div>
+                </div>
+            </div>
+            <ValidationProvider v-slot='{ errors }' name='name'>
+                <TextInput
+                    label="Fullname"
+                    name="name"
+                    v-model="currentUser.name"
+                    autocomplete="off"
+                    interfaceClass="black"
+                    :error='errors[0]'
+                    placeholder="E.G thompson peter"
+                >
+                </TextInput>
+            </ValidationProvider>
+            <ValidationProvider rules='required' v-slot='{ errors }' name='username'>
+                <TextInput
+                    label='Username'
+                    name='username'
+                    v-model='currentUser.username'
+                    required
+                    autocomplete='off'
+                    interfaceClass='black'
+                    :error='errors[0]'
+                    placeholder='E.G kodak'
+                >
+                </TextInput>
+            </ValidationProvider>
+            <ValidationProvider rules='required|email' v-slot='{ errors }' name='email'>
+                <TextInput
+                    label='Email Address'
+                    name='email'
+                    v-model='currentUser.email'
+                    required
+                    autocomplete='off'
+                    :error='errors[0]'
+                    interfaceClass='black'
+                    placeholder='E.G ay@example.com'
+                >
+                </TextInput>
+            </ValidationProvider>
+            <ValidationProvider v-slot='{ errors }' name='location'>
+                <TextInput
+                    label='Location'
+                    name='location'
+                    v-model='currentUser.location'
+                    autocomplete='off'
+                    interfaceClass='black'
+                    :error='errors[0]'
+                    placeholder='E.G Lagos, Nigeria'
+                >
+                </TextInput>
+            </ValidationProvider>
+             <ValidationProvider v-slot='{ errors }' name='summary'>
+                <TextArea
+                    label='location'
+                    name='location'
+                    v-model='currentUser.summary'
+                    autocomplete='off'
+                    interfaceClass='black'
+                    :error='errors[0]'
+                    placeholder='Write something about yourself...'
+                >
+                </TextArea>
+            </ValidationProvider>
+            <Button
+                value="Save Changes"
+                :isLoading='isLoading'
+            >
+            </Button>
+        </form>
+    </ValidationObserver>
     </PrimaryCard>
   </Layout>
 </template>
 
 <script>
-import { TextInput, Button } from '@/components/Form';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import { mapGetters } from 'vuex';
+import { TextInput, TextArea, Button } from '@/components/Form';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Nav from './components/Nav.vue';
 import Layout from '@/components/Layout/Layout.vue';
 
 export default {
-  name: 'basic-information',
-  components: {
-    Layout, TextInput, Button, Nav, PrimaryCard,
-  },
-  data() {
-    return {
-        formControls: {
-            fullname: {
-                value: 'Akinola Ayodeji',
-                label: 'Fullname',
-                touched: false,
-                placeholder: 'E.g coderarc',
-                validationRules: {
-                    required: true,
-                },
-            },
-            username: {
-                value: 'codeerarc',
-                label: 'Username',
-                touched: false,
-                placeholder: 'E.g coderarc',
-                validationRules: {
-                    required: true,
-                },
-            },
-            email: {
-                value: 'akinayodeji4all@gmail.com',
-                label: 'Email address',
-                touched: false,
-                placeholder: 'e.g joe@example.com',
-                validationRules: {
-                    required: true,
-                    email: true,
-                },
-            },
-            password: {
-                value: '',
-                label: 'Password',
-                touched: false,
-                placeholder: '***********',
-                validationRules: {
-                    required: true,
-                },
-            },
+    name: 'basic-information',
+    components: {
+        Layout, TextInput, Button, Nav, PrimaryCard, TextArea, ValidationProvider, ValidationObserver,
+    },
+    data() {
+        return {
+            isLoading: false,
+        };
+    },
+    computed: {
+        ...mapGetters(['currentUser', 'updateFeedback']),
+    },
+    methods: {
+        onSubmit(e) {
+            this.isLoading = true;
+            const data = {
+                uniqueid: this.currentUser.uid,
+                ...this.currentUser,
+            };
+            this.$store.dispatch('UPDATE_USER', data);
         },
-        submitted: false,
-    };
-  },
+    },
+    watch: {
+        updateFeedback(newValue) {
+            this.isLoading = false;
+            if (newValue.error) {
+                this.$toaster.error(newValue.message || 'Whoops something went wrong');
+            } else {
+                this.$toaster.success(newValue.message || 'Successfully updated');
+            }
+        },
+    },
 };
 </script>
 
@@ -148,12 +169,12 @@ export default {
     .name{
         font-size:0.9rem;
         font-weight:600;
-        font-family:$font-family-monserrat;
+        font-family:$font-family-muli;
     }
     .email{
         font-weight:400;
         font-size:.8rem;
-        font-family:$font-family-monserrat;
+        font-family:$font-family-muli;
     }
 }
 </style>

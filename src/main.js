@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VeeValidateHelpers from '@/helpers/vee-validate';
 import App from './App.vue';
 import router from './router';
 import Toaster from './components/Toaster';
@@ -7,7 +8,7 @@ import ProgressBar from './components/Progress';
 import store from './store';
 import './assets/css/tailwind.css';
 
-
+Vue.use(require('vue-moment'));
 // use it
 Vue.use(Modal);
 

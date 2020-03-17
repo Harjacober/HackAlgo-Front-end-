@@ -1,6 +1,6 @@
 <template>
-    <div class="form-group" v-bind:class="[interfaceClass]">
-        <label class="form-label">{{ label  }}</label>
+    <div class="form-group" v-bind:class="[interfaceClass]" >
+        <label class="form-label" :hidden='$attrs.hidden'>{{ label  }}</label>
         <input
             type="text"
             ref="input"

@@ -31,26 +31,20 @@
         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
           <PrimaryCard classNames='dasboard-card'>
             <h3 class="heading"> Explore </h3>
-            <ul class='list'>
-              <List :item='{
+            <div class='flex text-center middle card-placeholder'  v-if='!isLoadingTag && tags.length == 0'>
+              <img src='@/assets/svg/non.svg'/>
+            </div>
+            <div class='flex text-center spinner-container middle'  v-if='isLoadingTag'>
+                <clip-loader  color="#ccc" size="50px"></clip-loader>
+             </div>
+            <ul class='list' v-if='!isLoadingTag'>
+              <List
+                v-for='tag in tags'
+                v-bind:key='tag'
+                :item='{
                   tag: true,
-                  text: "Data Struture",
-                  url: "#"
-              }'/>
-              <List :item='{
-                  tag: true,
-                  text: "Tress",
-                  url: "#"
-              }'/>
-              <List :item='{
-                  tag: true,
-                  text: "Mathematical Modeling",
-                  url: "#"
-              }'/>
-              <List :item='{
-                  tag: true,
-                  text: "Heaps & Hashmaps",
-                  url: "#"
+                  text: tag,
+                  url: `/problem-set?tag=${tag.replace(/\s/g,"-")}`,
               }'/>
             </ul>
           </PrimaryCard>
@@ -58,31 +52,26 @@
         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
           <PrimaryCard classNames='dasboard-card'>
              <h3 class="heading"> Upcoming Contests </h3>
-              <ul class='list'>
-                <List :item='{
-                  contest: true,
-                  text: "Google uplabs challenge",
-                  date: "January , 15th, 2020 - 4hrs",
-                  url: "#"
-                }'/>
-                <List :item='{
-                  contest: true,
-                  text: "Futa codemental club 2020",
-                  date: "January , 15th, 2020 - 4hrs",
-                  url: "#"
-                }'/>
-                <List :item='{
-                  contest: true,
-                  text: "Aganifa challenge",
-                  date: "January , 15th, 2020 - 4hrs",
-                  url: "#"
-                }'/>
-                <List :item='{
-                  contest: true,
-                  text: "hashmap 2020",
-                  date: "January , 15th, 2020 - 4hrs",
-                  url: "#"
-                }'/>
+             <div class='flex text-center middle card-placeholder'  v-if='!isLoadingContest && contests.length == 0'>
+              <div>
+                <img src='@/assets/svg/non.svg'/>
+                <p class='text'>No contest to display at this time </p>
+              </div>
+            </div>
+             <div class='flex text-center spinner-container middle'  v-if='isLoadingContest'>
+                <clip-loader  color="#ccc" size="50px"></clip-loader>
+             </div>
+              <ul class='list' v-if='!isLoadingContest'>
+                <List
+                  v-for='contest in contests'
+                  v-bind:key='contest._id'
+                  :item='{
+                    contest: true,
+                    text: contest.title,
+                    url: `/contests/${contest._id}`,
+                    ...contest
+                  }'
+                />
               </ul>
           </PrimaryCard>
         </div>
@@ -92,15 +81,52 @@
 </template>
 
 <script>
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 import Layout from '@/components/Layout/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import LinkButton from '@/components/Button/LinkButton.vue';
 import List from '@/components/List/List.vue';
+import Http from '@/helpers/http';
 
 export default {
   name: 'dashboard',
   components: {
-    Layout, PrimaryCard, LinkButton, List,
+    Layout, PrimaryCard, LinkButton, List, ClipLoader,
+  },
+  data() {
+    return {
+      contests: [],
+      tags: [],
+      isLoadingContest: true,
+      isLoadingTag: true,
+    };
+  },
+  mounted() {
+    this.populateTags();
+    this.populateContests();
+  },
+  methods: {
+    populateTags() {
+      Http.get('/get/problemtags/')
+      .then((response) => {
+         this.tags = response.data.data.slice(0, 6);
+      })
+      .finally(() => {
+        this.isLoadingTag = false;
+      });
+    },
+    populateContests() {
+      Http.get('/contest/many/TYPEA/active/?page=1&limit=6')
+      .then((response) => {
+        this.contests = response.data.data.slice(0, 6);
+      })
+      .catch((error) => {
+        // console.log(error);
+      })
+      .finally(() => {
+        this.isLoadingContest = false;
+      });
+    },
   },
 };
 
@@ -112,7 +138,7 @@ export default {
     min-height:300px;
     padding:30px;
     .img{
-      width:auto;
+      width:100%;
       height:auto;
     }
     .content{
@@ -147,6 +173,22 @@ export default {
       font-weight:600;
       font-size:1.3rem
     }
+  }
+  .card-placeholder{
+    width:100%;
+    min-height: 200px;
+    img{
+      width:100%;
+      height:200px;
+      margin:40px 0;
+    }
+    .text{
+      color:#555;
+      font-size:0.8rem;
+    }
+  }
+  .spinner-container{
+    padding:110px 30px;
   }
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-    <button class="btn button ripple" :class='(type)? type : "primary"'>
+    <button class="btn button ripple" :class='(type)? type : "primary"' @click='$emit("click")'>
     <slot />
     </button>
 </template>
 <script>
 export default {
-    name: 'button',
+    name: 'p-button',
     props: {
         to: {
             type: String,
@@ -37,7 +37,7 @@ export default {
         background:$primary-color;
         border:1px solid $primary-color;
     }
-    &.secondary{
+    &.secondary, &.filled{
         background:$secondary-color;
         border:1px solid $secondary-color;
     }
