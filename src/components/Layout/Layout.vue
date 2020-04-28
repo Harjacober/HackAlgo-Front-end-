@@ -2,7 +2,7 @@
   <div class="app-layout">
       <Sidebar :isMobileOpen='isMobileSidebarOpen' @closeSidebar='closeSidebar'/>
       <main class="app-layout__main">
-        <Header @openSidebar='openSidebar'/>
+        <Header @openSidebar='openSidebar' :enableSearch='true'/>
           <div class="app-content">
             <h4 class="heading"> {{ pageName }}</h4>
             <slot></slot>
@@ -40,6 +40,9 @@ export default {
     return {
       isMobileSidebarOpen: false,
     };
+  },
+  mounted() {
+    this.$store.dispatch('CONTEST');
   },
 };
 </script>

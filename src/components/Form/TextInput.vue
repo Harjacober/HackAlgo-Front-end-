@@ -34,8 +34,7 @@ export default {
             default: 'white',
         },
     },
-    mounted() {
-    },
+    mounted() {},
 };
 
 </script>

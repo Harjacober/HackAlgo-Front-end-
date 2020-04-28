@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import socket from 'socket.io-client';
 import Layout from './components/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Button from '@/components/Button/Button.vue';
@@ -45,6 +46,18 @@ export default {
   components: {
     Layout,
     PrimaryCard,
+  },
+  mounted() {
+    const io = socket('ws://api.codegees.com/:9000/scoreboard/');
+    io.on('connect', () => {
+      io.emit('my event', {
+          data: 'I\'m connected!',
+      });
+      io.on('newscore', (data) => {
+        console.log(data);
+      });
+      console.log('received an event');
+    });
   },
 };
 </script>

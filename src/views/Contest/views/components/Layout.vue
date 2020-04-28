@@ -1,7 +1,10 @@
 <template>
    <div class="contest-app__layout" :class='pageClassName' >
       <Sidebar :isMobileOpen='isMobileSidebarOpen' @closeSidebar='closeSidebar'/>
-     <Header :headerTitle='headerTitle' :headerTimer='headerTimer' @openSidebar='openSidebar'/>
+     <Header
+        :headerTitle='currentContest.contest.title'
+        @openSidebar='openSidebar'
+      />
         <main class="contest-app__layout__main">
             <Nav />
             <slot></slot>
@@ -11,6 +14,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Header from '@/components/Header/Header.vue';
 import Footer from '@/components/Footer/Footer.vue';
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
@@ -30,8 +34,6 @@ export default {
       type: String,
       default: '',
     },
-    headerTitle: String,
-    headerTimer: String,
   },
   methods: {
     closeSidebar() {
@@ -46,7 +48,24 @@ export default {
       isMobileSidebarOpen: false,
     };
   },
-
+  computed: {
+    ...mapGetters(['currentContest', 'contestTimeUp']),
+  },
+  mounted() {
+    this.$store.dispatch('CONTEST', { slug: this.$route.params.slug });
+  },
+  watch: {
+    currentContest(value) {
+      if (value.error) {
+        this.$router.push('/dashboard');
+        this.$toaster.error('Page Not found');
+      }
+    },
+    contestTimeUp(value) {
+      this.$router.push('/dashboard');
+      this.$toaster.success('Contest has ended successfully. Thanks');
+    },
+  },
 };
 </script>
 

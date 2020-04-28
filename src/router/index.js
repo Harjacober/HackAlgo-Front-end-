@@ -17,11 +17,6 @@ const routes = [
     component: () => import('@/views/Home/Home.vue'),
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/About/About.vue'),
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login,
@@ -95,7 +90,7 @@ const routes = [
     },
   },
   {
-    path: '/contests/:slug',
+    path: '/contests/:type/:slug',
     name: 'contest-information',
     component: ContestInformation,
     meta: {
@@ -103,7 +98,7 @@ const routes = [
     },
   },
   {
-    path: '/contests/:slug/dashboard',
+    path: '/contests/:type/:slug/dashboard',
     name: 'contest-dashboard',
     component: ContestDashboard,
     meta: {
@@ -111,7 +106,7 @@ const routes = [
     },
   },
   {
-    path: '/contests/:slug/dashboard/:problem_slug/solve',
+    path: '/contests/:type/:slug/dashboard/:problem_slug/solve',
     name: 'contest-problem',
     component: ContestProblem,
     meta: {
@@ -119,7 +114,7 @@ const routes = [
     },
   },
   {
-    path: '/contests/:slug/submission',
+    path: '/contests/:type/:slug/submission',
     name: 'contest-submission',
     component: Submission,
     meta: {
@@ -127,7 +122,7 @@ const routes = [
     },
   },
   {
-    path: '/contests/:slug/scoreboard',
+    path: '/contests/:type/:slug/scoreboard',
     name: 'contest',
     component: ScoreBoard,
     meta: {

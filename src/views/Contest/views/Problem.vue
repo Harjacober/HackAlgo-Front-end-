@@ -1,45 +1,32 @@
 <template>
-  <Layout  headerTitle="Robinson Crusoe" headerTimer="50Min">
+  <Layout  headerTitle="Robinson Crusoe">
     <PrimaryCard classNames="contest-dasboard__card flex flex-wrap">
         <div class='w-full md:w-1/3'>
           <div class='problem-instruction'>
             <div class='content'>
-              <h3 class='title'> Robinson Crusoe </h3>
-              <h4 class='heading'> instructions </h4>
-              Robinson Crusoe decides to explore his isle. On a sheet of paper he plans the following process.<br>
-
-              His hut has coordinates origin = [0, 0]. From that origin he walks a given distance d on a line that has a given angle ang with the x-axis. He gets to a point A. (Angles are measured with respect to the x-axis)<br><br>
-
-              From that point A he walks the distance d multiplied by a constant distmult on a line that has the angle ang multiplied by a constant angmult and so on and on.<br><br>
-
-              We have d0 = d, ang0 = ang; then d1 = d * distmult, ang1 = ang * angmult etc ...<br><br>
-
-              Let us suppose he follows this process n times. What are the coordinates lastx, lasty of the last point?<br><br>
-
-              The function crusoe has parameters;<br>
-
-              n : numbers of steps in the process<br>
-              d : initial chosen distance<br>
-              ang : initial chosen angle in degrees<br>
-              distmult : constant multiplier of the previous distance<br>
-              angmult : constant multiplier of the previous angle<br>
-
-               n : numbers of steps in the process<br>
-              d : initial chosen distance<br>
-              ang : initial chosen angle in degrees<br>
-              distmult : constant multiplier of the previous distance<br>
-              angmult : constant multiplier of the previous angle<br>
+              <h3 class='title'> {{problem.name}} </h3>
+              <h4 class='heading'> Problem Statement </h4>
+              <p v-html="problemStatement"/>
           </div>
         </div>
       </div>
       <div class='w-full md:w-2/3'>
-        <CodeEditor/>
+        <CodeEditor
+          :problemId='problem._id'
+          :userId='currentUser.uid'
+          :ctype='$route.params.type'
+          problemType='contest'
+          :contestId='$route.params.slug'
+          :nextProblem='nextProblem'
+        />
       </div>
     </PrimaryCard>
   </Layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import Marked from 'marked';
 import Layout from './components/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Button from '@/components/Button/Button.vue';
@@ -51,6 +38,28 @@ export default {
     Layout,
     PrimaryCard,
     CodeEditor,
+  },
+  data() {
+    return {
+      problem: {},
+      nextProblem: null,
+    };
+  },
+  computed: {
+    ...mapGetters(['currentContest', 'currentUser']),
+    problemStatement() {
+      if (!this.problem.problemstatement) return '';
+      const md = new Marked.Renderer();
+      return Marked(this.problem.problemstatement, { renderer: md });
+    },
+  },
+  watch: {
+    currentContest() {
+      /* eslint-disable */
+      this.problem = this.currentContest.contest.problems.filter(contest => contest._id == this.$route.params.problem_slug)[0];
+      const index = this.currentContest.contest.problems.findIndex(prob => prob._id == this.problem._id);
+      this.nextProblem = this.currentContest.contest.problems[index+1] || false;
+    },
   },
 };
 </script>

@@ -1,102 +1,162 @@
 <template>
-    <PrimaryCard class='code-editor__card'>
-        <div class='code-editor__top'>
-            <div class=' flex flex-wrap'>
-                <p>Change Language:
-                    <select @change='handleLanguageChange'>
-                        <option selected>Javascript</option>
-                        <option>Go</option>
-                        <option>C#</option>
-                        <option>C++</option>
-                        <option>Python</option>
-                        <option>Java</option>
+    <div class='code-editor__wrapper'>
+        <PrimaryCard class='code-editor__card'>
+            <div class='code-editor__top'>
+                <div class=' flex flex-wrap'>
+                    <p>Change Language:
+                        <select @change='handleLanguageChange' :value='mode'>
+                            <option selected>Javascript</option>
+                            <option>Go</option>
+                            <option>C#</option>
+                            <option>C++</option>
+                            <option>Python</option>
+                            <option>Java</option>
+                        </select>
+                    </p>
+                    <p>Change theme:
+                    <select @change="handleThemeChange" :value='theme'>
+                        <option>3024-day</option>
+                        <option>3024-night</option>
+                        <option>abcdef</option>
+                        <option>ambiance</option>
+                        <option>ayu-dark</option>
+                        <option>ayu-mirage</option>
+                        <option>base16-dark</option>
+                        <option>base16-light</option>
+                        <option>bespin</option>
+                        <option>blackboard</option>
+                        <option>cobalt</option>
+                        <option>colorforth</option>
+                        <option>darcula</option>
+                        <option selected>dracula</option>
+                        <option>duotone-dark</option>
+                        <option>duotone-light</option>
+                        <option>eclipse</option>
+                        <option>elegant</option>
+                        <option>erlang-dark</option>
+                        <option>gruvbox-dark</option>
+                        <option>hopscotch</option>
+                        <option>icecoder</option>
+                        <option>idea</option>
+                        <option>isotope</option>
+                        <option>lesser-dark</option>
+                        <option>liquibyte</option>
+                        <option>lucario</option>
+                        <option>material</option>
+                        <option>material-darker</option>
+                        <option>material-palenight</option>
+                        <option>material-ocean</option>
+                        <option>mbo</option>
+                        <option>mdn-like</option>
+                        <option>midnight</option>
+                        <option>monokai</option>
+                        <option>moxer</option>
+                        <option>neat</option>
+                        <option>neo</option>
+                        <option>night</option>
+                        <option>nord</option>
+                        <option>oceanic-next</option>
+                        <option>panda-syntax</option>
+                        <option>paraiso-dark</option>
+                        <option>paraiso-light</option>
+                        <option>pastel-on-dark</option>
+                        <option>railscasts</option>
+                        <option>rubyblue</option>
+                        <option>seti</option>
+                        <option>shadowfox</option>
+                        <option>solarized dark</option>
+                        <option>solarized light</option>
+                        <option>the-matrix</option>
+                        <option>tomorrow-night-bright</option>
+                        <option>tomorrow-night-eighties</option>
+                        <option>ttcn</option>
+                        <option>twilight</option>
+                        <option>vibrant-ink</option>
+                        <option>xq-dark</option>
+                        <option>xq-light</option>
+                        <option>yeti</option>
+                        <option>yonce</option>
+                        <option>zenburn</option>
                     </select>
-                </p>
-                <p>Change theme:
-                <select @change="handleThemeChange">
-                    <option >default</option>
-                    <option>3024-day</option>
-                    <option>3024-night</option>
-                    <option>abcdef</option>
-                    <option>ambiance</option>
-                    <option>ayu-dark</option>
-                    <option>ayu-mirage</option>
-                    <option>base16-dark</option>
-                    <option>base16-light</option>
-                    <option>bespin</option>
-                    <option>blackboard</option>
-                    <option>cobalt</option>
-                    <option>colorforth</option>
-                    <option>darcula</option>
-                    <option selected>dracula</option>
-                    <option>duotone-dark</option>
-                    <option>duotone-light</option>
-                    <option>eclipse</option>
-                    <option>elegant</option>
-                    <option>erlang-dark</option>
-                    <option>gruvbox-dark</option>
-                    <option>hopscotch</option>
-                    <option>icecoder</option>
-                    <option>idea</option>
-                    <option>isotope</option>
-                    <option>lesser-dark</option>
-                    <option>liquibyte</option>
-                    <option>lucario</option>
-                    <option>material</option>
-                    <option>material-darker</option>
-                    <option>material-palenight</option>
-                    <option>material-ocean</option>
-                    <option>mbo</option>
-                    <option>mdn-like</option>
-                    <option>midnight</option>
-                    <option>monokai</option>
-                    <option>moxer</option>
-                    <option>neat</option>
-                    <option>neo</option>
-                    <option>night</option>
-                    <option>nord</option>
-                    <option>oceanic-next</option>
-                    <option>panda-syntax</option>
-                    <option>paraiso-dark</option>
-                    <option>paraiso-light</option>
-                    <option>pastel-on-dark</option>
-                    <option>railscasts</option>
-                    <option>rubyblue</option>
-                    <option>seti</option>
-                    <option>shadowfox</option>
-                    <option>solarized dark</option>
-                    <option>solarized light</option>
-                    <option>the-matrix</option>
-                    <option>tomorrow-night-bright</option>
-                    <option>tomorrow-night-eighties</option>
-                    <option>ttcn</option>
-                    <option>twilight</option>
-                    <option>vibrant-ink</option>
-                    <option>xq-dark</option>
-                    <option>xq-light</option>
-                    <option>yeti</option>
-                    <option>yonce</option>
-                    <option>zenburn</option>
-                </select>
-                </p>
+                    </p>
+                </div>
+                <div class='to-right flex'>
+                    <Button
+                        type='outlined'
+                        :isLoading='isRunning'
+                        @click='handleRunCode'
+                        :disabled='isSubmitting'
+                    > Run Code
+                    </Button>
+                    <Button
+                        type='filled'
+                        :isLoading='isSubmitting'
+                        @click='handleSubmit'
+                        :disabled='isRunning'
+                    > Submit
+                    </Button>
+                </div>
             </div>
-            <div class='to-right flex'>
-                <Button type='outlined'> Run Code</Button>
-                <Button type='filled'> Submit</Button>
+            <textarea id='editor' name='code'>
+            </textarea>
+            <div class='code-editor__bottom'>
+                <!-- <div class='checkboxes'>
+                    <label><input type='radio' name='stype' v-model='stype' value='sample'/> Sample testcase </label>
+                    <label><input type='radio' name='stype' v-model='stype' value='test'/> Test testcase </label>
+                </div> -->
+                <div class='to-left editor-form-group'>
+                    <label for='file'> Choose a file</label>
+                    <input type='file' class='editor-form-control file' id='file'  accept="js/*" @change='onFileChange'>
+                </div>
+                <div class='to-right'>
+                    <Button
+                        type='outlined'
+                        :isLoading='isRunning'
+                        @click='handleRunCode'
+                        :disabled='isSubmitting'
+                    > Run Code
+                    </Button>
+                    <Button
+                        type='filled'
+                        :isLoading='isSubmitting'
+                        @click='handleSubmit'
+                        :disabled='isRunning'
+                    > Submit
+                    </Button>
+                </div>
             </div>
-        </div>
-        <textarea id='editor' name='code'>
-        </textarea>
-        <div class='code-editor__bottom'>
-            <div class='to-right'>
-                <Button type='outlined'> Run Code</Button>
-                <Button type='filled'> Submit</Button>
+        </PrimaryCard>
+        <PrimaryCard v-if="showCard" classNames='code-editor__output'>
+            <div class='flex text-center spinner-container middle'  v-if='isRunning || isSubmitting'>
+                <div >
+                    <p>Running Test cases</p>
+                    <clip-loader  color="#ccc" size="50px"></clip-loader>
+                </div>
             </div>
-        </div>
-    </PrimaryCard>
+            <div v-if='hasFeedback'>
+                 <h3 class='heading' :class='countStatus.failed === 0? "success" : ""'> {{ message }} </h3>
+                <div class='next-problem' v-if='nextProblem && problemType == "contest" && countStatus.failed === 0 && stype === "test"'>
+                    <h2>Proceed to the next problem {{ nextProblem.name }}</h2>
+                    <LinkButton type='white' :to='problemLink' allowPageLoad>NEXT PROBLEM </LinkButton>
+                </div>
+                <div class='feedback'>
+                  <div class='case' v-for='(res, index) in result' v-bind:key='index' :class='res.passed ? "error" : "success"'>
+                    <h3>
+                        Testcase {{ index }}
+                        <span class='badge success' v-if='res.passed'> Passed </span>
+                        <span class='badge error' v-if='!res.passed'> Failed </span>
+                    </h3>
+                    <p class='output'>Output: {{res.output}}</p>
+                    <p class='log'>{{res.errput}}</p>
+                  </div>
+                </div>
+            </div>
+        </PrimaryCard>
+    </div>
 </template>
 
 <script>
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 import CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/3024-day.css';
@@ -178,48 +238,173 @@ import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/markdown/markdown';
+import Http from '@/helpers/http';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Button from '@/components/Button/Button.vue';
+import LinkButton from '@/components/Button/LinkButton.vue';
+
 
 export default {
     name: 'code-editor',
     components: {
         PrimaryCard,
         Button,
+        LinkButton,
+        ClipLoader,
     },
+    props: ['problemId', 'userId', 'ctype', 'problemType', 'contestId', 'nextProblem'],
     data() {
         return {
             theme: 'dracula',
-            mode: 'javascript',
+            mode: 'Javascript',
+            isRunning: false,
+            hasFeedback: false,
+            hasError: false,
+            feedback: '',
+            showCard: false,
+            codefile: null,
+            submitted: false,
+            isSubmitting: false,
+            stype: 'sample',
+            message: '',
+            result: [],
+            countStatus: { passed: 0, failed: 0 },
+            /* eslint-disable */
+            specialMode: {
+                'C++':'text/x-c++src', 
+                'C#': 'text/x-csharp', 
+                'Java': 'text/x-java',
+            },
         };
     },
     mounted() {
         this.editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
-            mode: this.mode,
+            mode: this.mode.toLowerCase(),
             lineNumbers: true,
             styleActiveLine: true,
             matchBrackets: true,
             lineWrapping: true,
         });
+
+        if (this.userId && localStorage.getItem(this.userId)) {
+            const storage = JSON.parse(localStorage.getItem(this.userId));
+            this.mode = storage.mode;
+            this.theme = storage.theme;
+        }
         /* eslint-disable */
         this.editor.setOption('theme', this.theme);
         this.editor.save();
+    },
+    computed: {
+        problemLink() {
+            /* eslint-disable */
+            return `/contests/${this.ctype}/${this.contestId}/dashboard/${this.nextProblem._id}/solve`;
+        },
     },
     methods: {
         handleThemeChange(e) {
             this.theme = e.target.value;
             this.editor.setOption('theme', this.theme);
             this.editor.save();
+
+            if(this.userId)
+            localStorage.setItem(this.userId, JSON.stringify({mode: this.mode, theme: this.theme}));
         },
         handleLanguageChange(e) {
-            const sepcialMode = {'c++':'text/x-c++src', 'c#': 'text/x-csharp', 'java': 'text/x-java'};
-            let mode = e.target.value.toLowerCase();
+            let mode = e.target.value
             this.mode = mode;
-            if (sepcialMode.hasOwnProperty(mode)){
-                mode = sepcialMode[mode];
+            if (this.specialMode.hasOwnProperty(mode)){
+                mode = this.specialMode[mode];
             }
-            this.editor.setOption('mode', mode);
+            this.editor.setOption('mode', mode.toLowerCase());
             this.editor.getDoc().setValue('');
+            this.editor.save();
+
+            if(this.userId)
+            localStorage.setItem(this.userId, JSON.stringify({mode: this.mode, theme: this.theme}));
+        },
+        handleRunCode() {
+            this.isRunning = true;
+            this.stype = 'sample';
+            this.sendRequest();
+        },
+        sendRequest() {
+            this.showCard = true;
+            this.hasFeedback = false;
+            const langs = {'python': 'py', 'javascript': 'js', 'go': 'go'};
+            const formData = new FormData(); 
+           
+            const data = {
+                prblmid: this.problemId,
+                userid: this.userId,
+                codecontent: this.editor.getValue(),
+                lang: langs[this.mode.toLowerCase()],
+                stype: this.stype,
+                codefile: this.codefile || '',
+            };
+            if (this.problemType === 'contest') {
+                data.ctype = this.ctype || '';
+                data.contestid = this.contestId || '';
+            }
+
+            for (var i in data ) {
+                formData.append(i, data[i]);
+            }
+            const url = (this.problemType == 'contest')? '/contest/run/code/' : '/run/code/';
+            Http.post(url, formData, 
+            {
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then((response) => {
+                this.hasFeedback = true;
+                this.result = response.data.data[0].result
+                this.countStatus.failed = 0;
+                this.countStatus.passed = 0;
+                for(let i in this.result){
+                    if( this.result[i].passed === true){
+                        this.countStatus.passed += 1;
+                    } else {
+                        this.countStatus.failed += 1;
+                    }
+                }
+                this.message = (this.countStatus.failed !== 0)? `${this.countStatus.passed} passed and ${this.countStatus.failed} failed.` : 'Successfully passed all test cases. kudoz 👍';
+            })
+            .catch((error) => {
+                this.hasFeedback = true;
+                this.countStatus.failed =1;
+                this.message = 'An error occurred';
+                this.feedback = error.response.data.message || "Whoops!! something went wrong.";
+            })
+            .finally(() => {
+                this.isRunning = false;
+                this.isSubmitting = false;
+                window.scrollTo(1500, 1500);
+            });
+        },
+        handleSubmit() {
+            this.isSubmitting = true;
+            this.stype = 'test';
+            this.sendRequest();
+        },
+        onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.codefile = files[0];
+        },
+    },
+    watch: {
+        userId(value){
+            
+            if (value && localStorage.getItem(value)) {
+                const storage = JSON.parse(localStorage.getItem(value));
+                this.mode = storage.mode;
+                this.theme = storage.theme;
+            }
+            /* eslint-disable */
+            const mode = this.specialMode.hasOwnProperty(this.mode) ? this.specialMode[mode] : this.mode;
+            this.editor.setOption('mode', mode.toLowerCase());
+            this.editor.setOption('theme', this.theme);
             this.editor.save();
         },
     },
@@ -228,6 +413,55 @@ export default {
 </script>
 
 <style lang='scss'>
+.code-editor__wrapper {
+    .spinner-container{
+        padding:20px;
+    }
+    .code-editor__output{
+        min-height: 50px;
+        padding:40px 0;
+        .heading{
+            padding:0 15px;
+            font-size:1.2rem;
+            &.success{
+                color:$secondary-color;
+                font-weight:700;
+            }
+        }
+    }
+    .next-problem {
+        background: $secondary-color;
+        padding:20px;
+        color:#fff;
+        margin:10px;
+        border-radius:10px;
+    }
+    .feedback {
+        padding: 20px;
+        font-weight:500;
+        font-size:0.8rem;
+        line-height: 2rem;
+    
+        .case{
+            padding:20px 10px;
+            border-radius:5px;
+            margin:5px 0;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.07);
+            .badge.error{
+                background:$red;
+                color:#fff;
+                padding:4px 20px;
+                border-radius:5px;
+            }
+            .badge.success{
+                background: $secondary-color;
+                color:#fff;
+                padding:4px 20px;
+                border-radius:5px;
+            }
+        }
+    }
+}
 .CodeMirror {
     border: 1px solid black; 
     font-size:1.14rem;
@@ -267,8 +501,34 @@ export default {
         }
     }
     .code-editor__bottom{
+        .editor-form-group {
+            padding:10px;
+            label {
+                display:block;
+                font-weight:600;
+                padding:5px 0;
+            }
+            .editor-form-control{
+                outline:none;
+                font-family:$primary-font-family;
+            }
+            @include MQ($breakpoint-lg){
+                position: relative;
+            }
+        }
+        .checkboxes{
+            padding:10px;
+            label{
+                padding:15px;
+                display: inline-block;
+            }
+        }
         .to-right{
             top:15px;
+             @include MQ($breakpoint-lg){
+                position: relative;
+                top:0;
+            }
         }
     }
     .code-editor{
@@ -277,4 +537,5 @@ export default {
         background-color: #1c2434;
     }
 }
+
 </style>

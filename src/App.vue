@@ -48,12 +48,12 @@ body {
     font-family:$font-family-muli;
     overflow-x:hidden;
     #nprogress .bar {
-      background: #fff;
+      background:  $secondary-color;
     }
 
     #nprogress .spinner-icon {
-      border-top-color: #fff;
-      border-left-color: #fff;
+      border-top-color: $secondary-color;
+      border-left-color:  $secondary-color;
     }
 }
 

@@ -2,13 +2,25 @@
    <nav class="contest-nav">
             <ul class="flex flex-wrap">
                 <li class="w-full md:w-1/3 lg:w-1/3 xl:w-1/3">
-                    <router-link to="/contests/ghsusis-uwuwjs8-ksksos/dashboard" > <i class='uil uil-user'></i> Dashboard</router-link>
+                    <router-link
+                        :to='"/contests/"+this.$route.params.type+"/"+this.$route.params.slug+"/dashboard"'
+                    >
+                        <i class='uil uil-user'></i> Dashboard
+                    </router-link>
                 </li>
                 <li class="w-full md:w-1/3 lg:w-1/3 xl:w-1/3">
-                    <router-link to="/contests/ghsusis-uwuwjs8-ksksos/submission"> <i class='uil uil-padlock'></i> Submission</router-link>
+                    <router-link
+                        :to='"/contests/"+this.$route.params.type+"/"+this.$route.params.slug+"/submission"'
+                    >
+                        <i class='uil uil-padlock'></i> Submission
+                    </router-link>
                 </li>
                 <li class="w-full md:w-1/3 lg:w-1/3 xl:w-1/3">
-                    <router-link to="/contests/ghsusis-uwuwjs8-ksksos/scoreboard"> <i class='uil uil-padlock'></i> Scoreboard</router-link>
+                    <router-link
+                        :to='"/contests/"+this.$route.params.type+"/"+this.$route.params.slug+"/scoreboard"'
+                    >
+                        <i class='uil uil-padlock'></i> Scoreboard
+                    </router-link>
                 </li>
             </ul>
     </nav>
@@ -16,7 +28,7 @@
 
 <script>
 export default {
-  name: 'Nav',
+    name: 'Nav',
 };
 </script>
 

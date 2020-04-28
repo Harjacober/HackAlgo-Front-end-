@@ -20,13 +20,13 @@
                   <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 stats-card__wrapper">
                       <PrimaryCard classNames='stats-card text-center'>
                         <p class='stats-title'>Solved Challenges</p>
-                        <h3 class='stats-number'> 100 + </h3>
+                        <h3 class='stats-number'> {{ Object.keys(user.solvedProblems).length }} </h3>
                       </PrimaryCard>
                   </div>
                   <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 stats-card__wrapper">
                     <PrimaryCard classNames='stats-card text-center'>
                       <p class='stats-title'>Contests</p>
-                      <h3 class='stats-number'> 100 + </h3>
+                      <h3 class='stats-number'> {{ contests.length }} </h3>
                     </PrimaryCard>
                   </div>
               </div>
@@ -34,26 +34,23 @@
             <div class='division '>
               <h3 class='heading'>Problem Set</h3>
               <div class='content'>
+                  <div class='flex text-center middle placeholder'  v-if='!isLoadingUser && user.solvedProblems.length == 0'>
+                    <div>
+                      <img src='@/assets/svg/non.svg'/>
+                      <p class='text'>No problem to display at this time </p>
+                    </div>
+                  </div>
+                  <div class='flex text-center spinner-container middle'  v-if='isLoadingUser'>
+                    <clip-loader  color="#ccc" size="50px"></clip-loader>
+                  </div>
                   <ul class='list'>
-                   <List :item='{
+                   <List
+                   v-for='(problem, id) in user.solvedProblems'
+                   v-bind:key='id'
+                   :item='{
                       code: true,
-                      text: "Round Robin",
-                      url: "#"
-                  }'/>
-                  <List :item='{
-                      code: true,
-                      text: "String Reverse",
-                      url: "#"
-                  }'/>
-                  <List :item='{
-                      code: true,
-                      text: "Dynamic Array manipulation",
-                      url: "#"
-                  }'/>
-                  <List :item='{
-                      code: true,
-                      text: "ZipZap",
-                      url: "#"
+                      text: problem,
+                      url: `/problem-set/${id}/solve`
                   }'/>
                 </ul>
               </div>
@@ -61,30 +58,24 @@
             <div class='division'>
               <h3 class='heading'>Contests</h3>
               <div class='content'>
+                <div class='flex text-center middle placeholder'  v-if='!isLoadingContest && contests.length == 0'>
+                  <div>
+                    <img src='@/assets/svg/non.svg'/>
+                    <p class='text'>No contest to display at this time </p>
+                  </div>
+                </div>
+                <div class='flex text-center spinner-container middle'  v-if='isLoadingContest'>
+                  <clip-loader  color="#ccc" size="50px"></clip-loader>
+                </div>
                 <ul class='list'>
-                  <List :item='{
+                  <List
+                  v-for='(contest, id) in contests'
+                  v-bind:key='id'
+                  :item='{
                     contest: true,
-                    text: "Google uplabs challenge",
-                    starttime: "January , 15th, 2020 - 4hrs",
-                    url: "#"
-                  }'/>
-                  <List :item='{
-                    contest: true,
-                    text: "Futa codemental club 2020",
-                    starttime: "January , 15th, 2020 - 4hrs",
-                    url: "#"
-                  }'/>
-                  <List :item='{
-                    contest: true,
-                    text: "Aganifa challenge",
-                    starttime: "January , 15th, 2020 - 4hrs",
-                    url: "#"
-                  }'/>
-                  <List :item='{
-                    contest: true,
-                    text: "hashmap 2020",
-                    starttime: "January , 15th, 2020 - 4hrs",
-                    url: "#"
+                    text: contest.title,
+                    url: `/contests/${contest._id}`,
+                    ...contest
                   }'/>
                 </ul>
               </div>
@@ -97,6 +88,7 @@
 </template>
 
 <script>
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import Layout from '@/components/Layout/Layout.vue';
 import List from '@/components/List/List.vue';
@@ -107,12 +99,16 @@ export default {
   components: {
     Layout,
     PrimaryCard,
+    ClipLoader,
     List,
   },
   data() {
     return {
-      user: {},
-      problems: [],
+      user: {
+        solvedProblems: [],
+      },
+      isLoadingContest: true,
+      isLoadingUser: true,
       contests: [],
     };
   },
@@ -125,26 +121,12 @@ export default {
       Http.get(`/user/profile/?username=${this.$route.params.username}`)
       .then((response) => {
         this.user = response.data.data;
-        this.populateUserContests(this.user.uniqueid);
-        this.populateUserSolvedProblems();
+        this.user.solvedProblems = this.user.solvedProblems.length ? this.user.solvedProblems : [];
+        this.populateUserContests(this.user._id)
       })
       .catch((error) => {
-        this.$router.push('/dashboard')
+        this.isLoadingUser = false;
       })
-      .finally(() => {
-        this.isLoading = false;
-      });
-    },
-    populateUserSolvedProblems() {
-       /* eslint-disable */
-      Http.get(`/get/problemset/?page=1&limit=50&filter=solved`)
-      .then((response) => {
-        this.problems = response.data.data;
-        console.log(this.problems);
-      })
-      .finally(() => {
-        this.isLoading = false;
-      });
     },
     populateUserContests(id) {
        /* eslint-disable */
@@ -157,7 +139,7 @@ export default {
         this.contests = response.data.data;
       })
       .finally(() => {
-        this.isLoading = false;
+        this.isLoadingContest = false;
       });
     },
   },
@@ -167,6 +149,18 @@ export default {
 <style lang="scss" scoped>
 .profile-card{
   padding:20px;
+  .placeholder{
+    padding:10px;
+    width:500px;
+    margin:0 auto;
+    img{
+      width:100%;
+      height:200px;
+    }
+    .text{
+      font-size:0.8rem;
+    }
+  }
 }
 .profile-card__left{
   min-height:400px;

@@ -16,7 +16,7 @@
                             <router-link to="/contests" class="ripple"><i class='uil uil-dice-five'></i> Contests</router-link>
                         </li>
                         <li>
-                            <router-link to="/problem-set" class="ripple"><i class='uil uil-science'></i> Problem Set</router-link>
+                            <router-link to="/problem-set" class="ripple"><i class="uil uil-brackets-curly"></i> Problem Set</router-link>
                         </li>
                     </ul>
                 </nav>
@@ -39,7 +39,7 @@
                             <router-link to="/contests" class="ripple"><i class='uil uil-dice-five'></i> Contests</router-link>
                         </li>
                         <li>
-                            <router-link to="/problem-set" class="ripple"><i class='uil uil-science'></i> Problem Set</router-link>
+                            <router-link to="/problem-set" class="ripple"><i class="uil uil-brackets-curly"></i> Problem Set</router-link>
                         </li>
                     </ul>
                 </nav>
@@ -92,7 +92,7 @@ export default {
     width:250px;
     height:100vh;
     position: fixed;
-    z-index: 9999;
+    z-index: 999;
     @include MQ($breakpoint-md){
       display:none;
     }
