@@ -74,6 +74,7 @@
                   :item='{
                     contest: true,
                     text: contest.title,
+                    starttime: contest.timeentered,
                     url: `/contests/${contest._id}`,
                     ...contest
                   }'/>

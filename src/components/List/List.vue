@@ -1,11 +1,18 @@
 <template>
   <li class='item-list'>
-    <router-link :to='item.url' >
-        <span v-if="item.tag">#</span>
-        <span v-if="item.contest">(*)</span>
-        <span v-if="item.code"><i class='uil uil-arrow'></i></span>
-        {{ item.text }}
-       <p class='date' v-if='item.starttime'>{{ item.starttime | moment('dddd, MMMM Do YYYY')}} - {{ item.duration | duration('as', 'hours') }}hrs</p>
+    <router-link :to='item.url'>
+      <div class='flex'>
+        <div class=''>
+          <span v-if="item.tag">#</span>
+          <span v-if="item.contest">(*)</span>
+          <span v-if="item.code"><i class='uil uil-arrow'></i></span>
+        </div>
+        <div class=''>
+          <p class='date' v-if='item.starttime'>{{ item.starttime | moment('dddd, MMMM Do YYYY')}} - {{ item.duration | duration('as', 'hours') }}hrs</p>
+          {{ item.text }}
+          <p class='rank' v-if='item.rank'>Rank: #{{ item.rank }}</p>
+        </div>
+       </div>
     </router-link>
   </li>
 </template>
@@ -47,11 +54,15 @@ li.item-list{
               display:inline-block;
             }
         }
+        .rank {
+          font-size:0.8rem;
+          font-weight:700;
+          color:$secondary-color;
+        }
         .date{
           color:rgb(88, 86, 86);
           font-size: 0.6rem;
           letter-spacing: 0.03rem;
-          margin-left:50px;
         }
         &:hover{
           background: #eee;
