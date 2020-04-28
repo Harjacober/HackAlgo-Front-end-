@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import footer from '@/components/footer.vue';
+import footer from '@/components/Footer/PageFooter.vue';
 
 describe('footer.vue', () => {
   it('renders props.msg when passed', () => {

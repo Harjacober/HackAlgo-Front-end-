@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve --fix",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
     "start": "node server.js"
   },
   "dependencies": {
