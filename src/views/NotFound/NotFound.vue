@@ -1,10 +1,9 @@
 <template>
-  <div class="not-found">
-      <Header/>
+  <PageLayout>
       <div class='flex flex-wrap not-found__content'>
         <div class='w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
             <div class='not-found-img__wrapper'>
-                <img src='/assets/404_page.svg' />
+                <img src='../../assets/svg/404.svg' />
             </div>
         </div>
          <div class='w-full md:w-1/2 lg:w-1/2 xl:w-1/2 '>
@@ -14,38 +13,37 @@
             </div>
         </div>
       </div>
-      <Footer />
-  </div>
+  </PageLayout>
 </template>
 
 <script>
-import Header from '../../components/header.vue';
-import Footer from '../../components/footer.vue';
+import PageLayout from '@/components/Layout/PageLayout.vue';
 
 export default {
   name: 'not-found',
   components: {
-    Header,
-    Footer,
+     PageLayout,
   },
 };
 
 </script>
 
 <style lang="scss" scoped>
+
 .not-found__content{
     min-height: 700px;
     padding:160px 0;
-    background:$primary-color;
+    max-width: 1000px;
+    margin:0 auto;
     .not-found-img__wrapper{
         padding:30px;
         img{
-             width:100%;
+            width:100%;
+            height:auto;
         }
     }
     .content{
         padding:100px 10px;
-        color:$secondary-color;
         line-height: 2.5rem;
         @include MQ($breakpoint-md){
             text-align:center;
@@ -54,13 +52,15 @@ export default {
         .heading{
             font-size: 2.4rem;
             font-weight:700;
+            font-family: $font-family-segoe;
             @include MQ($breakpoint-md){
                font-size:1.6rem
             }
         }
         .text{
-            font-size:1rem;
+            font-size:0.9rem;
             padding:5px 0;
+            letter-spacing: 0.03rem;
             @include MQ($breakpoint-md){
                font-size:0.9rem
             }

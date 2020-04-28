@@ -56,7 +56,7 @@ export default {
     },
   methods: {
     away(ev) {
-       if (this.refNode.contains(ev.target)) return;
+       if (this.refNode && this.refNode.contains(ev.target)) return;
         this.$emit('away');
     },
   },
@@ -78,7 +78,7 @@ export default {
     transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1);
     transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1), -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1);
     transition: all 0.233s cubic-bezier(0, 0, 0.21, 1);
-    // opacity:0.7;
+    opacity:0;
     outline: none;
     border:1px solid #eee;
     will-change: transform;

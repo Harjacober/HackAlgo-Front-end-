@@ -1,7 +1,11 @@
 
 .auth-container{
-    background:$primary-color;
+    background:#fff;
     min-height:100vh;
+    background: $secondary-color;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, $secondary-color, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, $secondary-color, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: rgb(232, 245, 239);
     width:100%;
     .logo{
         padding:50px 0px;
@@ -17,7 +21,7 @@
         background:#fff;
         border-radius:10px;
         position:relative;
-        box-shadow:0 30px 40px 0 rgba(0,0,0,0.07);
+        box-shadow:0 10px 20px 0 rgba(0,0,0,0.07);
         min-height:30vh;
         padding:10px 20px;
     }

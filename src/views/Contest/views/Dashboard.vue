@@ -1,27 +1,30 @@
 <template>
-  <Layout headerTitle="Robinson Crusoe" headerTimer="2h:00m">
+  <Layout>
     <PrimaryCard classNames="contest-dasboard__card">
       <h3 class='heading'> Problem Set</h3>
        <div class='problem-set flex flex-wrap'>
-        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
-           <ProblemCard :item='item'/>
-        </div>
-        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
-           <ProblemCard :item='item'/>
+        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2" v-for="(problem, index) in currentContest.contest.problems" v-bind:key="index">
+           <ProblemCard :item='{
+            title: problem.name,
+            url: `/contests/${$route.params.type}/${$route.params.slug}/dashboard/${problem._id}/solve`,
+            ...problem
+          }'/>
         </div>
        </div>
-      <div class='text-center button-wrapper'>
-       <Button type='secondary'> Submit Solution </Button>
-      </div>
+      <!-- <div class='text-center button-wrapper'>
+       <Button type='secondary' @click='submitContest'> Submit Solution </Button>
+      </div> -->
     </PrimaryCard>
   </Layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Layout from './components/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
 import ProblemCard from '@/components/Card/ProblemCard.vue';
 import Button from '@/components/Button/Button.vue';
+import Http from '@/helpers/http';
 
 export default {
   name: 'contest-dasboard',
@@ -29,16 +32,19 @@ export default {
     Layout,
     PrimaryCard,
     ProblemCard,
-    Button,
   },
   data() {
     return {
-      item: {
-        title: 'Robinson Crusoe',
-        url: '/contests/ghsusis-uwuwjs8-ksksos/dashboard/ghsusis-uwuwjs8-ksksos/solve',
-        difficulty: 'hard',
-      },
+      timeUp: false,
     };
+  },
+  computed: {
+    ...mapGetters(['currentContest']),
+  },
+  methods: {
+    submitContest(e) {
+      console.log(this.currentContest.contest);
+    },
   },
 };
 </script>

@@ -7,16 +7,15 @@
                         <i class='uil uil-bars'></i>
                     </button>
                     <h3 class='title' v-if='headerTitle'> {{ headerTitle }}</h3>
-                    <div class='search-form flex' v-if='!headerTitle'>
+                    <div class='search-form flex' v-if='enableSearch'>
                       <i class='uil uil-search search-icon'></i>
                       <input class='form-control' placeholder='Search' />
                     </div>
                 </div>
                 <nav class="app-header__nav to-right">
                     <ul >
-                            <li class='timer list' v-if='headerTimer'>
-                              <i class='uil uil-clock-three'></i>{{ headerTimer }}
-                            </li>
+                            <Counter v-if="!$store.getters.currentContest.error" />
+
                             <li class="profile list">
                                 <div class="flex"   @click="toggleDropdown" ref="profileToggleNode">
                                     <img src="/assets/myAvatar.png" class="profile-image" alt="profile image"/>
@@ -50,11 +49,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import Dropdown from '../Dropdown/Dropdown.vue';
+import Counter from '../Timer/Counter.vue';
 
 export default {
     name: 'app-header',
     components: {
         Dropdown,
+        Counter,
     },
     data() {
         return {
@@ -67,9 +68,8 @@ export default {
             type: String,
             default: null,
         },
-         headerTimer: {
-            type: String,
-            default: null,
+        enableSearch: {
+            type: Boolean,
         },
     },
     mounted() {
@@ -116,7 +116,7 @@ export default {
   left:250px;
   right:0;
   width:calc(100% - 250px);
-  z-index:999;
+  z-index:99;
   background:#fff;
   position:fixed;
   @include MQ($breakpoint-md){

@@ -14,14 +14,15 @@
       </nav>
       <PrimaryCard classNames="problem-card">
         <h4 class='heading'> Problem Statement </h4>
-        <div class='content content-desc'></div>
+        <div class='content content-desc' v-html="problemStatement"/>
       </PrimaryCard>
-       <CodeEditor/>
+       <CodeEditor :problemId='problemId' :userId='currentUser.uid'/>
     </div>
   </Layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Marked from 'marked';
 import Layout from '@/components/Layout/Layout.vue';
 import PrimaryCard from '@/components/Card/PrimaryCard.vue';
@@ -38,19 +39,28 @@ export default {
   data() {
     return {
       problem: {},
+      problemId: '',
     };
   },
    mounted() {
+    this.problemId = this.$route.params.slug;
     this.populateProblem();
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
+    problemStatement() {
+      if (!this.problem.problemstatement) return '';
+      const md = new Marked.Renderer();
+      return Marked(this.problem.problemstatement, { renderer: md });
+    },
   },
   methods: {
     populateProblem() {
       Http.get(`/get/problem/?prblmid=${this.$route.params.slug}`)
       .then((response) => {
         this.problem = response.data.data;
-        const md = new Marked.Renderer();
-        document.querySelector('.content-desc').innerHTML = Marked(this.problem.problemstatement, { renderer: md });
       })
+      .catch(error => this.$router.push('/dashboard'))
       .finally(() => {
         this.isLoading = false;
       });

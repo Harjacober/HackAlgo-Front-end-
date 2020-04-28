@@ -1,7 +1,7 @@
 <template>
      <PrimaryCard classNames='problem-card'>
         <router-link :to='item.url'>
-            <p class='level'> Dificulty: <span>{{ item.difficulty }}</span></p>
+            <p class='level ' v-if='item.difficulty'> Dificulty: <span>{{ item.difficulty }}</span></p>
             <h3 class='title'> {{ item.title }} </h3>
             <ul class='tags'>
                 <li v-for="tag in item.tags" :key='tag'>

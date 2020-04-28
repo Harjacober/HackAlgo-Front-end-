@@ -1,31 +1,41 @@
 <template>
   <Layout pageName="Contests">
     <nav class='contests-nav'>
-      <ul>
-        <li><router-link to='/contests?type=all' > All </router-link></li>
-        <li><router-link to='/contests?type=registered' > Registered </router-link ></li>
-      </ul>
+      <div class='contests-nav__panel'>
+       <VSelect
+        v-model='selectedFilter'
+        :options="types"
+        @select='filterContests'
+      />
+      </div>
     </nav>
     <div class="contests">
-      <div class='flex text-center middle content-placeholder'  v-if='!isLoading && contests.length == 0'>
+      <div class='flex text-center middle content-placeholder'  v-if='!isLoading && !isError && contests.length == 0'>
         <div class='text-center content-placeholder__panel'>
           <img src='@/assets/svg/non.svg'/>
           <p class='text'> No contest to display at this time</p>
         </div>
       </div>
+      <div class='flex text-center middle content-placeholder'  v-if='isError'>
+        <div class='text-center content-placeholder__panel'>
+          <img src='@/assets/svg/non.svg'/>
+          <p class='text'>Whoops!! something went wrong</p>
+        </div>
+      </div>
       <div class='flex text-center spinner-container middle'  v-if='isLoading'>
         <clip-loader  color="#ccc" size="50px"></clip-loader>
       </div>
-      <div class="flex flex-wrap" v-if='!isLoading'>
+      <div class="flex flex-wrap contests-card__wrapper" v-if='!isLoading && !isError'>
         <div class="w-full md:w-1/2 lg:w-1/4 xl:w-1/4" v-for='contest in contests' v-bind:key='contest._id'>
           <PrimaryCard classNames='contest-card'>
-            <router-link :to='"/contests/"+contest._id' class='link'>
+            <router-link :to='"/contests/"+contest.contesttype+"/"+contest._id' class='link'>
               <h3 class='title'> {{ contest.title }} </h3>
-              <p class='summary'> {{ contest.desc }} </p>
+              <p class='summary'> {{ contest.desc.slice(0, 100) }} </p>
               <p class='time'>{{ contest.starttime | moment('dddd, MMMM Do YYYY')}} - {{ contest.duration | duration('as', 'hours') }}hrs </p>
             </router-link>
             <Button type="secondary" v-if='!contest.registered' @click='RegisterContest( contest )'> Register </Button>
-            <span class='success' v-if='contest.registered'><i class='uil uil-check-square'></i> Sucessfully registered </span>
+            <span class='success' v-if='contest.registered && contest.status !== 1'><i class='uil uil-check-square'></i> Sucessfully registered </span>
+            <span class='success' v-if='contest.status === 1'><i class='uil uil-check-square'></i> Completed </span>
           </PrimaryCard>
         </div>
       </div>
@@ -41,6 +51,7 @@ import Layout from '@/components/Layout/Layout.vue';
 import Button from '@/components/Button/Button.vue';
 import Http from '@/helpers/http';
 import { RegisterContestModal } from '@/components/Modals';
+import VSelect from '@/components/Select/index.vue';
 
 export default {
   name: 'contests',
@@ -50,29 +61,50 @@ export default {
     Button,
     ClipLoader,
     RegisterContestModal,
+    VSelect,
   },
   data() {
     return {
       isLoading: true,
       contests: [],
       isModalVisible: false,
+      isError: false,
       currentContest: {},
+      selectedFilter: this.$route.query.type || 'all',
+      types: [
+        'all',
+        'started',
+        'active',
+        'registered',
+      ],
     };
   },
   mounted() {
     if (!this.$route.query.type) {
       this.$router.push('/contests?type=all');
     }
-    this.populateContests();
+
+    this.populateContests(this.selectedFilter);
   },
   methods: {
-    populateContests() {
-      Http.get('/contest/many/TYPEA/active/?page=1&limit=50')
+    populateContests(type) {
+       /* eslint-disable */
+      const registered = type && type.toLowerCase() === 'registered';
+      if (registered) {
+        type = 'active';
+      }
+
+      Http.get(`/contest/many/TYPEA/${type}/?page=1&limit=50`)
       .then((response) => {
-        this.contests = response.data.data;
+        if (registered) {
+        this.contests = this.contests.filter(contest => contest.registered === true);
+        } else {
+          this.contests = response.data.data;
+        }
+        this.isError = false;
       })
       .catch((error) => {
-        // console.log(error);
+        this.isError = true;
       })
       .finally(() => {
         this.isLoading = false;
@@ -85,15 +117,27 @@ export default {
       this.currentContest = contest;
       this.isModalVisible = true;
     },
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    },
+    hideDropdown() {
+      this.isDropdownOpen = false;
+    },
+     filterContests(type) {
+      if (type === this.$route.query.type) return;
+
+      this.$router.push({
+        path: '/contests',
+        query: {
+          type,
+        },
+      });
+    },
   },
   watch: {
     /* eslint-disable */
     '$route.query.type': function (type) {
-      if (type.toLowerCase() === 'registered') {
-        this.contests = this.contests.filter(contest => contest.registered === true);
-      } else {
-        this.populateContests()
-      }
+      this.populateContests(type);
     },
   },
 };
@@ -105,28 +149,29 @@ export default {
   width:100%;
 }
 .contests-nav{
-    border-bottom:1px solid #ddd;
-    li{
-      display:inline-block;
-      a{
-        padding:15px 30px;
-        font-weight:600;
-        cursor:pointer;
-        opacity:0.7;
-        transition:0.3s;
-        display:block;
-        &:hover{
-          opacity:1;
-        }
-        &.active{
-          border-bottom:3px solid $secondary-color;
-          position:relative;
-          bottom:-1px;
-          opacity:1;
+    // border-bottom:1px solid #ddd;
+    position: relative;
+    .contests-nav__panel {
+      position: absolute;
+      right:0;
+      .filter-button {
+        padding:0 0;
+        padding-left: 10px;
+        border:none;
+        span {
+          background:#fff;
+          color:#000;
+          padding:5px 0;
+          width:100%;
+          border-radius:0 5px 5px 0;
+          display:inline-block
         }
       }
     }
-  }
+}
+.contests-card__wrapper {
+  margin-top:50px;
+}
 .contest-card{
   padding:25px 20px;
   transition: 0.5s;
