@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     submitContest(e) {
-      console.log(this.currentContest.contest);
     },
   },
 };
