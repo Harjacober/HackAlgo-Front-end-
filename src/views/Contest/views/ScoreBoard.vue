@@ -54,9 +54,8 @@ export default {
           data: 'I\'m connected!',
       });
       io.on('newscore', (data) => {
-        console.log(data);
+        // console.log(data);
       });
-      console.log('received an event');
     });
   },
 };

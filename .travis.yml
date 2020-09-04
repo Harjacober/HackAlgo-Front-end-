@@ -1,20 +1,11 @@
 language: node_js
 node_js:
 - stable
+install: npm install
 cache:
-  directories:
-  - node_modules
+  npm: false
 jobs:
   include:
-  - name: Unit Tests
-    stage: Testing/Static Analysis
-    script: 
-      - npm run test:unit -- --forceExit --silent --testTimeout=10000 --maxWorkers=4
-    after_script:
-      - cat ./coverage/lcov.info | coveralls
-  - name: Linting
-    stage: Testing/Static Analysis
-    script: npm run lint
   - name: Deploy to staging
     if: branch = master
     stage: Deployment
@@ -24,8 +15,7 @@ jobs:
       provider: heroku
       skip_cleanup: true
       api_key:
-        secure: gDDXG9Cn7X+CrAJIOaVIilS1FnhTWABhstl/okcrX6/MI0IgMT2MGUF4syvCw9DlxbEeH6cNw746AOzOn5OeTO9KL9oMvG+juS1SSVqt7LYk+qZRstnzTJAyKKWGJKPhQshDxIK/lPvBQ8VN1UfG0bjBKHVNIURxMev3QFaPy6vueccgEabCbhalf+fWdSo/E8K4JMrqEG34lHXFNi/ZZI/v3aPhYhEy9iobc4AfT1Nqo5LkSZcTxX1igcM2vbqXAHfy5zANYcXut507r3JL1CwOoXvApW5FtNj1ZNfKs7MTQCoF4I1ZUWZ7kzsk2teUck1s/PvzatW/n1OppXBl+XuT7V6MviXhamg7lTJFR6qRw1qMMTqpv8a1QPFDJTLwmpHICpCv+FprgxpDuZ8AQrRiNcoPpXwkPlzB51LLMOy3tZLYJpvc7/XhFpjdIrR48DiAOedPI05/vPrvCfRvSTcAyIt5oBECmce30EhG+fpatHI6oO08xnRKsVMerQM5mv24Re4cBNhF4g6DdZu81Pu+i/zdrMNvsVM/QCKc0ZidVFZbvt2IlTVI426sulIzWrIZC20qN6YFIqUD6jbgz9nrALWE+n1MlK5sI1LZdvnujLVNUfcfRgAw/df+PoWFSQE4MHR4J80PgUssFRL7rXJlHrQDs5UevD8gdAD65n8=
+        secure: oLGUbTm8fKLpd6xN+oEPOJ/7HsuFsIPjCn5XqeozpEWP0fbt/831FmYRCwAqm20L+nJKZyTgI672oDOpSwG+4Eljn8tl0ThoNkedQwDOMUOLMkSpOZkSv8zLoda2xdwIbQICRXHKXV9CRfwWlg7g6ph1gXYTSmAmvjP4w/8NAVbeLpev7rD+C+agvjjV3E/j4czn00fkhePyAqRl3GyARzOJ7mcDshZTy4l92slmA+9mA5ze0BJK3wXPasYMjGqqoKmFr5r705CynMxvAnKUVaVoGIFg+tUpUU/Q1z//usjLcJMRN71y3RL9HKZCqB3EsTXMvifgK4mQVydAuMIBy6CfiaZ+Xbd2x81Qh5HMWRyuD9uopqheAj3LgXROGJj7fJEXYnMnsvgzRYWUiO1YkLJw/F92gOSH3I9Rog6Txkb5F05JVuAbChoOr03mfNWVhMQxJ6U9bfD4FBGWRT/9fwlnMbKXd7TMM8MHSbfbpLpqLo/iMNiJ7yDwXypl5xNprZMcqgMoOrCYtH00lQyJbm8WW8FbQqHQIPN/nfDKrf0WVBxjyGlYxRM3/4rE+H6v06nPEzC/ewp6iDAUoH8hgAncFpMnYfYWy/9I2huQ08bFCd+PvUDD2gJEq9xWSMqPF+4vTc+t5Az9stYmvtGzR3REqKAVXHOFtlB003B1czA=
       app: hackalgo
 stages:
-- Testing/Static Analysis
 - Deployment
