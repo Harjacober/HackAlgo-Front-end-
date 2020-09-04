@@ -10,6 +10,9 @@
             <div class='content'>
                 <h3 class='heading'>Page Not Found</h3>
                 <p class='text'>The page you are looking is not available</p>
+                <LinkButton to='/' type='secondary'>
+                  <i class="uil uil-arrow-left" ></i> Go Home
+                </LinkButton>
             </div>
         </div>
       </div>
@@ -18,11 +21,13 @@
 
 <script>
 import PageLayout from '@/components/Layout/PageLayout.vue';
+import LinkButton from '@/components/Button/LinkButton.vue';
 
 export default {
   name: 'not-found',
   components: {
-     PageLayout,
+    PageLayout,
+    LinkButton,
   },
 };
 
@@ -44,7 +49,6 @@ export default {
     }
     .content{
         padding:100px 10px;
-        line-height: 2.5rem;
         @include MQ($breakpoint-md){
             text-align:center;
             padding:40px 10px;
@@ -60,6 +64,7 @@ export default {
         .text{
             font-size:0.9rem;
             padding:5px 0;
+             line-height: 2.5rem;
             letter-spacing: 0.03rem;
             @include MQ($breakpoint-md){
                font-size:0.9rem

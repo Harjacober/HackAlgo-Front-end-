@@ -119,11 +119,12 @@ export default {
   methods: {
     populateUser() {
        /* eslint-disable */
-      Http.get(`/user/profile/?username=${this.$route.params.username}`)
+      Http().get(`/user/profile/?username=${this.$route.params.username}`)
       .then((response) => {
         this.user = response.data.data;
-        this.user.solvedProblems = this.user.solvedProblems.length ? this.user.solvedProblems : [];
-        this.populateUserContests(this.user._id)
+        this.user.solvedProblems = (this.user.solvedProblems)? this.user.solvedProblems : [];
+        this.isLoadingUser = false;
+        this.populateUserContests(this.user._id);
       })
       .catch((error) => {
         this.isLoadingUser = false;
@@ -131,7 +132,7 @@ export default {
     },
     populateUserContests(id) {
        /* eslint-disable */
-      Http({
+      Http()({
         method: "get",
         url: '/my/contest/history/',
         params: { userid: id },

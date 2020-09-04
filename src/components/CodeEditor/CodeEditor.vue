@@ -7,7 +7,8 @@
                         <select @change='handleLanguageChange' :value='mode'>
                             <option selected>Javascript</option>
                             <option>Go</option>
-                            <option>C#</option>
+                            <option>Php</option>
+                            <option>C</option>
                             <option>C++</option>
                             <option>Python</option>
                             <option>Java</option>
@@ -236,6 +237,7 @@ import 'codemirror/addon/fold/markdown-fold';
 import 'codemirror/addon/fold/comment-fold';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/css/css';
+import 'codemirror/mode/php/php';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/markdown/markdown';
 import Http from '@/helpers/http';
@@ -272,7 +274,7 @@ export default {
             /* eslint-disable */
             specialMode: {
                 'C++':'text/x-c++src', 
-                'C#': 'text/x-csharp', 
+                'C': 'text/x-csrc', 
                 'Java': 'text/x-java',
             },
         };
@@ -331,12 +333,18 @@ export default {
         sendRequest() {
             this.showCard = true;
             this.hasFeedback = false;
-            const langs = {'python': 'py', 'javascript': 'js', 'go': 'go'};
+            const langs = {
+                'python': 'py', 
+                'javascript': 'js', 
+                'go': 'go',
+                'c': 'c',
+                'php': 'php',
+                'c++': 'cpp',
+            };
             const formData = new FormData(); 
-           
+
             const data = {
                 prblmid: this.problemId,
-                userid: this.userId,
                 codecontent: this.editor.getValue(),
                 lang: langs[this.mode.toLowerCase()],
                 stype: this.stype,
@@ -351,7 +359,7 @@ export default {
                 formData.append(i, data[i]);
             }
             const url = (this.problemType == 'contest')? '/contest/run/code/' : '/run/code/';
-            Http.post(url, formData, 
+            Http().post(url, formData, 
             {
                 headers: {'Content-Type': 'multipart/form-data' }
             })

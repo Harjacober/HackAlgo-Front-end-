@@ -14,7 +14,7 @@ const defaultState = {
 const actions = {
     VERIFY: (context, payload) => {
         let error = { error: true };
-        Http.get(`/user/registration/?id=${payload.id}`)
+        Http().get(`/user/registration/?id=${payload.id}`)
         .then((response) => {
           if (response.data.code === 500 || response.data.code === 400) {
             error = { ...error, message: 'Invalid Provided token' };
@@ -30,7 +30,7 @@ const actions = {
     },
     RECOVER: (context, payload) => {
       let error = { error: true };
-      Http.get(`/forgot/password/?email=${payload.email}`)
+      Http().get(`/forgot/password/?email=${payload.email}`)
       .then((response) => {
         if (response.data.code === 500 || response.data.code === 400 || response.data.code === 404) {
           error = { ...error, message: response.data.msg };
@@ -52,7 +52,7 @@ const actions = {
         const source = CancelToken.source();
         let error = { error: true };
 
-        Http.post('/user/login/', payload, {
+        Http().post('/user/login/', payload, {
             cancelToken: source.token,
         })
         .then((response) => {
@@ -79,7 +79,7 @@ const actions = {
         const { CancelToken } = Axios;
         const source = CancelToken.source();
         let error = { error: true };
-        Http.post('/user/registration/', payload, {
+        Http().post('/user/registration/', payload, {
             cancelToken: source.token,
         })
         .then((response) => {
@@ -103,7 +103,7 @@ const actions = {
     },
     UPDATE_USER: (context, payload) => {
       let error = { error: true };
-      Http.post('/user/profile/update/', payload)
+      Http().post('/user/profile/update/', payload)
       .then((response) => {
           if (response.data.code === 400) {
             error = { ...error, message: response.data.msg };
@@ -121,7 +121,7 @@ const actions = {
   },
   CHANGE_PASSWORD: (context, payload) => {
     let error = { error: true };
-    Http.post('/change/password/authuser/', payload)
+    Http().post('/change/password/authuser/', payload)
     .then((response) => {
       if (response.data.code === 500 || response.data.code === 400) {
         error = { ...error, message: response.data.msg };
@@ -137,7 +137,7 @@ const actions = {
   },
   RESET_PASSWORD: (context, payload) => {
     let error = { error: true };
-    Http.post('/change/password/', payload)
+    Http().post('/change/password/', payload)
     .then((response) => {
       if (response.data.code === 500 || response.data.code === 400) {
         error = { ...error, message: 'Invalid Provided token' };

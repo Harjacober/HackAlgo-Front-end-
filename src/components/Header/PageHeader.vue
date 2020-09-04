@@ -8,10 +8,10 @@
             </div>
             <nav class='header-nav'>
                 <ul>
-                    <li>
+                    <li class='hidden md:inline-block lg: inline-block xl: inline-block'>
                         <router-link to='/login'>Login</router-link>
                     </li>
-                    <li>
+                    <li class=' inline-block'>
                         <LinkButton to='/register' type='secondary' DisableRipple>Register</LinkButton>
                     </li>
                 </ul>
@@ -53,7 +53,6 @@ export default {
         top:10px;
         li {
             margin:20px 20px;
-            display: inline-block;
         }
         .btn {
             position: relative;

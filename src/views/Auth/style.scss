@@ -8,14 +8,18 @@
     background: rgb(232, 245, 239);
     width:100%;
     .logo{
-        padding:50px 0px;
+        padding:0 30px;
+        margin:40px 0;
+        font-size: 1rem;
+        border-left:5px solid $secondary-color;
+        display: inline-block;
     }
 }
 .auth-content{
     max-width:450px;
     margin:0 auto;
     padding:10px 30px;
-    padding-top:100px;
+    padding-top:10px;
     border-radius:10px;
     .auth-content__panel{
         background:#fff;

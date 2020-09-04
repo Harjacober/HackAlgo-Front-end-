@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     populateTags() {
-      Http.get('/get/problemtags/')
+      Http().get('/get/problemtags/')
       .then((response) => {
          this.tags = response.data.data.slice(0, 6);
       })
@@ -116,7 +116,7 @@ export default {
       });
     },
     populateContests() {
-      Http.get('/contest/many/TYPEA/active/?page=1&limit=6')
+      Http().get('/contest/many/TYPEA/active/?page=1&limit=6')
       .then((response) => {
         this.contests = response.data.data.slice(0, 6);
       })

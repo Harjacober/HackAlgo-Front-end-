@@ -5,6 +5,8 @@ const URL = process.env.VUE_APP_BASE_URL;
 const Http = Axios.create({
     baseURL: URL,
 });
-Http.defaults.headers = authHeader();
 
-export default Http;
+export default () => {
+    Http.defaults.headers = authHeader();
+    return Http;
+};

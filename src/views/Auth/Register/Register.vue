@@ -1,6 +1,8 @@
 <template>
     <div class='auth-container'>
-      <!-- <h1 class='logo color-white  text-center'> HackAlgo </h1> -->
+      <div class='text-center'>
+            <router-link to='/'><h1 class='logo text-center'> CodeGees </h1> </router-link>
+        </div>
         <div class='auth-content'>
             <div class='auth-content__panel'>
             <div class='auth-content__top text-center'>
