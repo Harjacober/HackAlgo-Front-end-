@@ -90,7 +90,7 @@ export default {
         contestid: this.$route.params.slug,
         contesttype: this.$route.params.type,
       };
-      Http.get(`/my/submission/history/?contestid=${payload.contestid}&contesttype=${payload.contesttype}`)
+      Http().get(`/my/submission/history/?contestid=${payload.contestid}&contesttype=${payload.contesttype}`)
       .then((response) => {
         this.submissions = response.data.data;
         this.isError = false;

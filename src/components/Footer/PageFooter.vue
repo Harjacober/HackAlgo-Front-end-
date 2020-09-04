@@ -6,6 +6,7 @@
         <li> <a href='#'><i class="uil uil-twitter-alt"></i> Twitter</a> </li>
         <li> <a href='#'><i class="uil uil-facebook-messenger-alt"></i> Facebook</a> </li>
         <li> <a href='#'><i class="uil uil-instagram"></i> Instagram</a> </li>
+        <li> <a href='#'><i class="uil uil-slack"></i> Slack</a> </li>
       </ul>
       <p class='text'>© 2020 · CodeGees.com · All rights reserved</p>
     </div>
@@ -22,7 +23,7 @@ export default {
   .page-footer__panel{
     max-width: 1100px;
     margin: 0 auto;
-    padding:60px 0;
+    padding:60px 20px;
     font-size:0.8rem;
   }
   .lists {

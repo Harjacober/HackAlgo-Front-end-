@@ -24,7 +24,7 @@ const actions = {
         contest: {},
       });
     }
-    Http.post('/enter/contest/', {
+    Http().post('/enter/contest/', {
         contesttype: 'TYPEA',
         contestid: payload.slug,
       })
@@ -50,7 +50,7 @@ const actions = {
         const source = CancelToken.source();
         let error = { error: true };
 
-        Http.post('/register/contest/', payload, {
+        Http().post('/register/contest/', payload, {
             cancelToken: source.token,
         })
         .then((response) => {

@@ -36,13 +36,16 @@ export default {
         font-size: 3.5rem;
         font-family: $font-family-segoe;
         @include MQ($breakpoint-md) {
-          font-size:2rem;
+          font-size:1.5rem;
         }
       }
       .sub-heading {
         padding: 20px 0;
-        font-size:0.9rem;
+        font-size:1rem;
         font-weight: 400;
+         @include MQ($breakpoint-md) {
+          font-size:0.9rem;
+        }
       }
     }
   }

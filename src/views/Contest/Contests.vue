@@ -34,8 +34,8 @@
               <p class='time'>{{ contest.starttime | moment('dddd, MMMM Do YYYY')}} - {{ contest.duration | duration('as', 'hours') }}hrs </p>
             </router-link>
             <Button type="secondary" v-if='!contest.registered' @click='RegisterContest( contest )'> Register </Button>
-            <span class='success' v-if='contest.registered && contest.status !== 1'><i class='uil uil-check-square'></i> Sucessfully registered </span>
-            <span class='success' v-if='contest.status === 1'><i class='uil uil-check-square'></i> Completed </span>
+            <span class='success' v-if='contest.registered && contest.status !== 400'><i class='uil uil-check-square'></i> Sucessfully registered </span>
+            <span class='success' v-if='contest.status === 400'><i class='uil uil-check-square'></i> Completed </span>
           </PrimaryCard>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default {
         type = 'active';
       }
 
-      Http.get(`/contest/many/TYPEA/${type}/?page=1&limit=50`)
+      Http().get(`/contest/many/TYPEA/${type}/?page=1&limit=50`)
       .then((response) => {
         if (registered) {
         this.contests = this.contests.filter(contest => contest.registered === true);

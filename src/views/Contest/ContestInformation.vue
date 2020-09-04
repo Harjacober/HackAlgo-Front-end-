@@ -103,7 +103,7 @@ export default {
       this.timeUp = value;
     },
     populateContest() {
-      Http.get(`/contest/${this.$route.params.type}/${this.$route.params.slug}/`)
+      Http().get(`/contest/${this.$route.params.type}/${this.$route.params.slug}/`)
       .then((response) => {
         this.contest = response.data.data;
         /* eslint-disable no-underscore-dangle */
@@ -121,7 +121,7 @@ export default {
     },
     enterContest() {
       this.enteringContest = true;
-      Http.post('/enter/contest/', {
+      Http().post('/enter/contest/', {
         contesttype: this.contest.contesttype,
         contestid: this.contest._id,
       })
