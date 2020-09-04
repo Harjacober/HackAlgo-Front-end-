@@ -69,6 +69,7 @@ export default {
       contests: [],
       isModalVisible: false,
       isError: false,
+      isEmpty: false,
       currentContest: {},
       selectedFilter: this.$route.query.type || 'all',
       types: [
@@ -104,7 +105,12 @@ export default {
         this.isError = false;
       })
       .catch((error) => {
-        this.isError = true;
+        console.log(error.response.status);
+        if (error.response.status === 400) {
+          this.isEmpty = true;
+        } else {
+          this.isError = true;
+        }
       })
       .finally(() => {
         this.isLoading = false;
