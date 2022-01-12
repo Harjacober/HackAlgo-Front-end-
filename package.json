@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "install": "^0.13.0",
     "jwt-decode": "^2.2.0",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "marked": "^0.8.0",
     "moment": "^2.24.0",
     "npm": "^6.13.7",
